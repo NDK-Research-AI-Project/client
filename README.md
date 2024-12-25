@@ -1,3 +1,6 @@
+Prod - https://your-ai-prod.netlify.app 
+dev - https://your-ai-dev.netlify.app
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
