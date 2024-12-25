@@ -6,8 +6,8 @@ import Chat from '../pages/chat/Chat';
 import SignIn from '../pages/auth/signIn/SignIn';
 import SignUp from '../pages/auth/signUp/SignUp';
 import ResetPassword from '../pages/auth/resetPassword/ResetPassword';
-import ViewDocument from '../pages/document/viewDocument';
-import UploadDocument from '../pages/document/uploadDocument';
+import ViewDocument from '../pages/document/ViewDocument';
+import UploadDocument from '../pages/document/UploadDocument';
 import Settings from '../pages/settings/Settings';
 
 export const router = createBrowserRouter([
