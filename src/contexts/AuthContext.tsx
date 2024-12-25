@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { api } from '../services/axios/api';
 import { ApiError } from '../services/axios/types';
+//import { set } from 'react-hook-form';
 
 // Development flag
 const IS_DEV_MODE = true;
@@ -39,9 +40,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [user, setUser] = useState<any>(IS_DEV_MODE ? MOCK_USER : null);
-  const [token, setToken] = useState<string | null>(
-    IS_DEV_MODE ? MOCK_TOKEN : null
-  );
+  // const [token, setToken] = useState<string | null>(
+  //   IS_DEV_MODE ? MOCK_TOKEN : null
+  // );
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
     IS_DEV_MODE ? true : false
   );
@@ -49,26 +50,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     IS_DEV_MODE ? false : true
   );
 
-  useEffect(() => {
-    const initializeAuth = async () => {
-      const token = localStorage.getItem('token');
-      if (token) {
-        await validateToken(token);
-      }
-      setIsLoading(false);
-    };
-
-    if (IS_DEV_MODE) {
-      // Auto-login for development
-      setUser(MOCK_USER);
-      setToken(MOCK_TOKEN);
-      return;
-    }
-    initializeAuth();
-  }, []);
-
-  const validateToken = async (token: string) => {
+  const validateUser = async () => {
     try {
+      setIsLoading(true);
       const { data } = await api.get<{ user: User }>('/auth/verify');
       setUser(data.user);
       setIsAuthenticated(true);
@@ -76,14 +60,27 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       const apiError = error as ApiError;
       console.error('Token validation failed:', apiError.message);
       logout();
+    } finally {
+      setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (IS_DEV_MODE) {
+      // Auto-login for development
+      setUser(MOCK_USER);
+      //setToken(MOCK_TOKEN);
+      return;
+    }
+    //TODO : there will be async error
+    validateUser();
+  }, []);
 
   const login = async (email: string, password: string) => {
     if (IS_DEV_MODE) {
       // Mock successful login
       setUser(MOCK_USER);
-      setToken(MOCK_TOKEN);
+      //setToken(MOCK_TOKEN);
       localStorage.setItem('token', MOCK_TOKEN);
       return;
     }
@@ -105,7 +102,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const logout = () => {
     if (IS_DEV_MODE) {
       setUser(null);
-      setToken(null);
+      //setToken(null);
       localStorage.removeItem('token');
       return;
     }

@@ -39,7 +39,8 @@ export default function SignUp() {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = async (data: SignUpForm) => {
+  //  const onSubmit = async (data: SignUpForm) => {
+  const onSubmit = async () => {
     setIsLoading(true);
     setError('');
     try {

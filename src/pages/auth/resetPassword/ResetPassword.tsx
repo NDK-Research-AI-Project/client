@@ -38,7 +38,8 @@ export default function ResetPassword() {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = async (data: ResetPasswordForm) => {
+  // const onSubmit = async (data: ResetPasswordForm) => {
+  const onSubmit = async () => {
     if (!token) {
       setError('Invalid reset token');
       return;

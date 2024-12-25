@@ -29,7 +29,8 @@ export default function SignIn() {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = async (data: SignInForm) => {
+  //const onSubmit = async (data: SignInForm) => {
+  const onSubmit = async () => {
     setIsLoading(true);
     setError('');
     try {

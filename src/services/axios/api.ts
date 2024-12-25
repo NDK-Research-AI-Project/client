@@ -16,6 +16,7 @@ const createApiError = (error: AxiosError): ApiError => ({
 });
 
 const shouldRetry = (error: AxiosError, config: RequestConfig): boolean => {
+  console.log('error', error); // TODO : this line needs to be removed
   if (!config.retry) return false;
   if (!config.retryAttempts) config.retryAttempts = 0;
   return (
