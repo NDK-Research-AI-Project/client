@@ -7,7 +7,7 @@ interface RootLayoutProps {
 }
 
 const LoadingFallback: React.FC = () => (
-  <div className="flex items-center justify-center p-4">
+  <div className="flex items-center justify-center p-5">
     <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900" />
   </div>
 );
@@ -22,8 +22,8 @@ const RootLayout: React.FC<RootLayoutProps> = ({
       <Sidebar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} />
       <main
         className={`
-          flex-1 p-4 transition-all duration-300
-          ${isCollapsed ? 'ml-20' : 'ml-64'}
+          flex-1 p-4 transition-all duration-300 h-screen 
+          ${isCollapsed ? 'ml-28' : 'ml-72'}
         `}
       >
         <Suspense fallback={<LoadingFallback />}>
