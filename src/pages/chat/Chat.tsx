@@ -6,39 +6,13 @@ import {
   PlusIcon,
 } from '@heroicons/react/24/outline';
 import { PaperAirplaneIcon } from '@heroicons/react/24/solid';
-import React, { useState } from 'react';
-import gradientBackground from '../../assets/gradientBackground.svg';
-
-interface Message {
-  id: string;
-  text: string;
-  sender: 'user' | 'ai';
-  timestamp: Date;
-}
+import React from 'react';
 
 interface ChatProps {
   className?: string;
 }
 
 const Chat: React.FC<ChatProps> = ({ className }) => {
-  const [messages, setMessages] = useState<Message[]>([]);
-  const [inputMessage, setInputMessage] = useState<string>('');
-
-  const handleSendMessage = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!inputMessage.trim()) return;
-
-    const newMessage: Message = {
-      id: Date.now().toString(),
-      text: inputMessage,
-      sender: 'user',
-      timestamp: new Date(),
-    };
-
-    setMessages([...messages, newMessage]);
-    setInputMessage('');
-  };
-
   return (
     <div
       className={`flex flex-col h-full ${className} border border-[#e3e6ea] rounded-2xl py-4 px-5`}
