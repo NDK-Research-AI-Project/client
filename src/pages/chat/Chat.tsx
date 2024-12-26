@@ -19,7 +19,7 @@ const Chat: React.FC<ChatProps> = ({ className }) => {
     >
       <div className="flex items-center justify-between border-b pb-3">
         <h1 className="text-2xl font-bold">Chats</h1>
-        <button className="flex justify-center items-center gap-1 py-2 px-3 mb-2 rounded-lg cursor-pointer bg-[#2777fb] text-white font-semibold text-sm ">
+        <button className="flex justify-center items-center gap-1 py-2 px-3  rounded-lg cursor-pointer bg-[#2777fb] text-white font-semibold text-sm ">
           <span>
             <PlusIcon className="w-4 h-4 " />
           </span>
@@ -101,7 +101,7 @@ export const ChatCard = () => {
   return (
     <>
       {/* TODO : single Chat Card */}
-      <div className="flex flex-row justify-between items-center bg-white shadow-md rounded-lg p-4 w-full text-sm cursor-pointer hover:shadow-xl hover:scale-[1.02] transition-all duration-300">
+      <div className="flex flex-row justify-between items-center bg-white shadow-lg rounded-lg p-4 w-full text-sm cursor-pointer hover:shadow-xl hover:scale-[1.02] transition-all duration-300">
         {/* Chat Name */}
         <p className="font-semibold ">
           Lorem ipsum dolor sit amet consectetur adipisc
