@@ -7,12 +7,15 @@ import {
 } from '@heroicons/react/24/outline';
 import { PaperAirplaneIcon } from '@heroicons/react/24/solid';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface ChatProps {
   className?: string;
 }
 
 const Chat: React.FC<ChatProps> = ({ className }) => {
+  const navigate = useNavigate();
+
   return (
     <div
       className={`flex flex-col h-full ${className} border border-[#e3e6ea] rounded-2xl py-4 px-5`}
@@ -38,7 +41,10 @@ const Chat: React.FC<ChatProps> = ({ className }) => {
             placeholder="How can I help you?"
             className="w-full border-0 text-sm focus:outline-none pl-2 "
           />
-          <button className="bg-[#2777fb] text-white rounded-lg px-3 py-2">
+          <button
+            className="bg-[#2777fb] text-white rounded-lg px-3 py-2"
+            onClick={() => navigate('/chat/new')}
+          >
             <PaperAirplaneIcon className="w-5 h-5" />
           </button>
         </div>
