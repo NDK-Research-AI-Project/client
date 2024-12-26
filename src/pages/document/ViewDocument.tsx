@@ -10,7 +10,6 @@ import {
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { sampleDocuments } from '../../data/mockData';
-import { formatTimeAgo } from '../../utils/dateTime';
 
 interface IDocument {
   id: string;
