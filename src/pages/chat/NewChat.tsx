@@ -160,7 +160,7 @@ export const MessageBlock: React.FC<{ message: Message }> = ({ message }) => {
             />
             <div className="flex flex-col">
               <div className="flex items-center gap-2">
-                <p className="font-semibold">Sam Walton</p>
+                <p className="font-semibold">Your AI</p>
                 <div className="border-r h-6"></div>
                 <p className="text-[#666f8d]">
                   {message.timestamp.toLocaleTimeString()}
