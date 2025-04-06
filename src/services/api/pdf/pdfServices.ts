@@ -3,7 +3,6 @@
 import { api } from '../../axios/api';
 
 interface IPdfUploadResponse {
-  success: boolean;
   message: string;
   documentId?: string;
   // Add any other properties that might come from the API
@@ -38,10 +37,10 @@ export const uploadPdfDocument = async (
     }
 
     return { data };
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error in uploadPdfDocument:', error);
     const errorMessage =
-      error instanceof Error ? error.message : 'Unknown error occurred';
+      error.response.data.message || 'Unknown error occurred';
     return { error: errorMessage };
   }
 };

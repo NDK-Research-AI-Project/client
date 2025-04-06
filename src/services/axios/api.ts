@@ -61,7 +61,7 @@ const createResponseInterceptor = (axiosInstance: AxiosInstance) => {
         handleUnauthorized();
       }
 
-      return Promise.reject(createApiError(error));
+      return Promise.reject(error);
     }
   );
 };
