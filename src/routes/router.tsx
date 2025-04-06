@@ -9,6 +9,7 @@ import ResetPassword from '../pages/auth/resetPassword/ResetPassword';
 import ViewDocument from '../pages/document/ViewDocument';
 import UploadDocument from '../pages/document/UploadDocument';
 import Settings from '../pages/settings/Settings';
+import NewChat from '../pages/chat/NewChat';
 
 export const router = createBrowserRouter([
   {
@@ -20,6 +21,7 @@ export const router = createBrowserRouter([
         children: [
           { index: true, element: <Navigate to="/chat" replace /> },
           { path: 'chat', element: <Chat /> },
+          { path: 'chat/new', element: <NewChat /> }, // TODO : need to pass chat id as url param
           {
             path: 'document',
             element: <Navigate to="/document/view" replace />,
