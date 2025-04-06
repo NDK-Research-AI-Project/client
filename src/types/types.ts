@@ -30,3 +30,9 @@ export function mapFileType(fileType: string): FileType {
   const fileTypeUpper = fileType.toUpperCase();
   return FileType[fileTypeUpper as keyof typeof FileType] || FileType.OTHER;
 }
+
+export interface ErrorResponseType {
+  message: string;
+  details: string;
+  status: number;
+}

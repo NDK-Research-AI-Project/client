@@ -6,18 +6,11 @@ import {
   DocumentTextIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline';
-
 import { ChangeEvent, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FileType } from '../../types/types';
-import { BlobServiceClient } from '@azure/storage-blob';
 import { formatFileSize } from '../../utils/fileSizeCalculate';
-
-const sasToken =
-  'sv=2022-11-02&ss=bf&srt=sco&sp=rwdlaciytfx&se=2026-01-16T14:20:42Z&st=2025-01-16T06:20:42Z&spr=https&sig=DPvh5A7SBzd3tJWRVKY8r4N1CLSxHH67omKmCyodzWw%3D'; // Replace with your SAS token
-const blobServiceUrl =
-  'https://researchpdfstore.blob.core.windows.net/?sv=2022-11-02&ss=bf&srt=sco&sp=rwdlaciytfx&se=2026-01-16T14:20:42Z&st=2025-01-16T06:20:42Z&spr=https&sig=DPvh5A7SBzd3tJWRVKY8r4N1CLSxHH67omKmCyodzWw%3D'; // Replace with your Blob Service URL
-const containerName = 'blobpdfcontainer'; // Replace with your container name
+import { uploadPdfDocument } from '../../services/api/pdf/pdfServices';
 
 interface DocumentDetails {
   name: string;
@@ -78,85 +71,22 @@ const UploadDocument = () => {
 
     // Set initial upload state
     setIsUploading(true);
-    setUploadStatus('Preparing upload...');
+    setUploadStatus('Uploading in progress...');
 
-    try {
-      setUploadStatus(`Uploading ${documents.length} files...`);
+    const { data, error } = await uploadPdfDocument(documents[0].file);
 
-      const blobUrl = new URL(blobServiceUrl);
+    if (error) {
+      setUploadStatus('Error uploading file: ' + error);
+      setIsUploading(false);
+      return;
+    }
 
-      // Remove any existing query parameters
-      blobUrl.search = '';
-      // Add SAS token (remove leading '?' if present)
-      const cleanSasToken = sasToken.startsWith('?')
-        ? sasToken.substr(1)
-        : sasToken;
-
-      const blobServiceClient = new BlobServiceClient(
-        `${blobUrl.toString()}?${cleanSasToken}`
-      );
-
-      // Verify container access
-      const containerClient =
-        blobServiceClient.getContainerClient(containerName);
-      await containerClient.getProperties(); // Test connection
-
-      // Upload logic
-      const uploadPromises = documents.map(async (file) => {
-        try {
-          const blockBlobClient = containerClient.getBlockBlobClient(file.name);
-          await blockBlobClient.uploadData(file, {
-            blobHTTPHeaders: { blobContentType: file.type },
-            concurrency: 20,
-            blockSize: 4 * 1024 * 1024, // 4MB chunks
-            onProgress: (progress) => {
-              setUploadProgress((prev) => ({
-                ...prev,
-                [file.name]: Math.floor(
-                  (progress.loadedBytes / file.size) * 100
-                ),
-              }));
-            },
-          });
-          // Verify uploaded size
-          const properties = await blockBlobClient.getProperties();
-          console.log(
-            `Uploaded size for ${file.name}: ${properties.contentLength} bytes`
-          );
-
-          return {
-            fileName: file.name,
-            success: properties.contentLength === file.size,
-          };
-        } catch (error) {
-          console.error(`Error uploading ${file.name}:`, error);
-          return { fileName: file.name, success: false };
-        }
-      });
-
-      const results = await Promise.all(uploadPromises);
-
-      const successCount = results.filter((r) => r.success).length;
-      const failureCount = results.length - successCount;
-
-      setUploadStatus(
-        `Upload complete: ${successCount} files uploaded successfully` +
-          (failureCount > 0 ? `, ${failureCount} files failed` : '')
-      );
-
+    if (data) {
+      setUploadStatus('Upload successful: ' + data.message);
+      setIsUploading(false);
       // Clear uploaded files
       setDocuments([]);
-    } catch (error: any) {
-      console.error('Error in upload process:', error);
-      if (error.message?.includes('authentication')) {
-        setUploadStatus(
-          'Authentication failed. Please check your credentials.'
-        );
-      } else {
-        setUploadStatus('Error uploading files.');
-      }
-    } finally {
-      setIsUploading(false);
+      return;
     }
   };
 
@@ -194,11 +124,12 @@ const UploadDocument = () => {
                     id="FileUpload"
                     className="relative mb-5.5 block w-full cursor-pointer appearance-none rounded border border-dashed border-[#a1a1a1] bg-[#f7f8fa] py-9 px-4  sm:py-7.5"
                   >
+                    {/* Drag and drop area */}
                     <input
                       ref={fileInputRef}
                       type="file"
                       accept=".pdf"
-                      multiple
+                      // multiple
                       onChange={handleFileChange}
                       className="absolute inset-0 z-50 m-0 h-full w-full cursor-pointer p-0 opacity-0 outline-none"
                     />
