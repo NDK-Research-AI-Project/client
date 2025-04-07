@@ -13,6 +13,24 @@ interface IPdfResponseType {
   error?: string;
 }
 
+// Interface for document items returned from the backend
+interface IPdfDocument {
+  _id: string;
+  filename: string;
+  numberOfPages: number;
+  fileSize: number;
+  fileType: string;
+  uploadDate: string;
+  azureBlobUrl: string;
+  azureBlobName: string;
+  downloadUrl: string;
+}
+
+interface IGetAllPdfResponse {
+  documents?: IPdfDocument[];
+  error?: string;
+}
+
 export const uploadPdfDocument = async (
   file: File
 ): Promise<IPdfResponseType> => {
@@ -41,6 +59,26 @@ export const uploadPdfDocument = async (
     console.error('Error in uploadPdfDocument:', error);
     const errorMessage =
       error.response.data.message || 'Unknown error occurred';
+    return { error: errorMessage };
+  }
+};
+
+/**
+ * Fetches all uploaded PDF documents from the server
+ */
+export const getAllPdfDocuments = async (): Promise<IGetAllPdfResponse> => {
+  try {
+    const { data } = await api.get<IGetAllPdfResponse>('/documents');
+
+    if (!data || !data.documents) {
+      throw new Error('Failed to retrieve PDF documents');
+    }
+
+    return { documents: data.documents };
+  } catch (error: any) {
+    console.error('Error in getAllPdfDocuments:', error);
+    const errorMessage =
+      error.response.data.message || 'Failed to retrieve PDF documents';
     return { error: errorMessage };
   }
 };
