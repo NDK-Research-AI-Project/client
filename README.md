@@ -1,7 +1,5 @@
 # YourAI: Retrieval-Augmented Generation Frontend
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/yourproject/deploy-status)](https://app.netlify.com/sites/your-ai-prod/deploys)
-
 ## Deployment Links
 
 - Production: [https://your-ai-prod.netlify.app](https://your-ai-prod.netlify.app)
