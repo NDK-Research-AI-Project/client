@@ -1,4 +1,5 @@
 # YourAI: Retrieval-Augmented Generation Frontend
+![Project Image](https://github.com/NDK-Research-AI-Project/client/blob/main/public/homeScreen.png?raw=true)
 
 ## Deployment Links
 
