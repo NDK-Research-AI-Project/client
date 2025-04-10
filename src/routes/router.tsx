@@ -10,6 +10,8 @@ import ViewDocument from '../pages/document/ViewDocument';
 import UploadDocument from '../pages/document/UploadDocument';
 import Settings from '../pages/settings/Settings';
 import NewChat from '../pages/chat/NewChat';
+import ViewGlossary from '../pages/glossary/viewGlossary';
+import UploadGlossary from '../pages/glossary/uploadGlossary';
 
 export const router = createBrowserRouter([
   {
@@ -28,6 +30,12 @@ export const router = createBrowserRouter([
           },
           { path: 'document/view', element: <ViewDocument /> },
           { path: 'document/upload', element: <UploadDocument /> },
+          {
+            path: 'glossary',
+            element: <Navigate to="/glossary/view" replace />,
+          },
+          { path: 'glossary/view', element: <ViewGlossary /> },
+          { path: 'glossary/upload', element: <UploadGlossary /> },
           { path: 'settings', element: <Settings /> },
         ],
       },

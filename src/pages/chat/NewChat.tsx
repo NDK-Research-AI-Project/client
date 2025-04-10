@@ -9,6 +9,7 @@ import {
 import { PaperAirplaneIcon } from '@heroicons/react/24/solid';
 import React, { useEffect, useRef, useState } from 'react';
 import { sendChatMessage } from '../../services/api/chat/chatServices';
+import { showError } from '../../utils/toaster';
 
 enum senderType {
   ai = 'ai',
@@ -55,8 +56,9 @@ const NewChat: React.FC<ChatProps> = ({ className }) => {
 
     if (error) {
       // TODO show err notification to user
-      console.error('Error sending message:', error);
+      showError(error);
       setLoading(false);
+      console.error('Error sending message:', error);
       return;
     }
 
@@ -70,6 +72,34 @@ const NewChat: React.FC<ChatProps> = ({ className }) => {
       setLoading(false);
       setMessages((prev) => [...prev, aiMessage]);
     }
+
+    // const sendUserPrompt = sendChatMessage({ question: userMessage.text }).then(
+    //   ({ data, error }) => {
+    //     if (error) {
+    //       // TODO show err notification to user
+    //       console.error('Error sending message:', error);
+    //       showError(error);
+    //       setLoading(false);
+    //       return;
+    //     }
+    //     if (data) {
+    //       const aiMessage: Message = {
+    //         id: (Date.now() + 1).toString(),
+    //         text: data.answer,
+    //         sender: senderType.ai,
+    //         timestamp: new Date(),
+    //       };
+    //       setLoading(false);
+    //       setMessages((prev) => [...prev, aiMessage]);
+    //     }
+    //   }
+    // );
+
+    // showPromise(sendUserPrompt, {
+    //   loading: 'Sending...',
+    //   success: 'Success!',
+    //   error: (error: string) => `${error}`,
+    // });
   };
 
   useEffect(() => {
@@ -95,7 +125,7 @@ const NewChat: React.FC<ChatProps> = ({ className }) => {
                     "
       ></div>
       <div className="flex items-center justify-between mb-4 border-b pb-3">
-        <h1 className="text-2xl font-bold">Lorem ipsum dolor sit</h1>
+        <h1 className="text-2xl font-bold">New chat</h1>
 
         <div className="flex items-center gap-1">
           <button className="flex justify-center items-center gap-1 py-2 px-3 mr-2 rounded-lg cursor-pointer bg-[#2777fb] text-white font-semibold text-sm ">

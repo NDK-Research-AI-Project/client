@@ -38,8 +38,6 @@ export const uploadPdfDocument = async (
     const formData = new FormData();
     formData.append('file', file);
 
-    console.log('FormData:', formData); // Log the FormData object
-
     const { data } = await api.post<IPdfUploadResponse>(
       '/knowledge-graph/process-document',
       formData,
@@ -57,8 +55,7 @@ export const uploadPdfDocument = async (
     return { data };
   } catch (error: any) {
     console.error('Error in uploadPdfDocument:', error);
-    const errorMessage =
-      error.response.data.message || 'Unknown error occurred';
+    const errorMessage = error.response.data.error || 'Unknown error occurred';
     return { error: errorMessage };
   }
 };
@@ -78,29 +75,29 @@ export const getAllPdfDocuments = async (): Promise<IGetAllPdfResponse> => {
   } catch (error: any) {
     console.error('Error in getAllPdfDocuments:', error);
     const errorMessage =
-      error.response.data.message || 'Failed to retrieve PDF documents';
+      error.response.data.error || 'Failed to retrieve PDF documents';
     return { error: errorMessage };
   }
 };
 
 // TODO : Not important for now, but we can implement this in the future
-export const deletePdfDocument = async (
-  documentId: string
-): Promise<IPdfResponseType> => {
-  try {
-    const { data } = await api.delete<IPdfUploadResponse>(
-      `/documents/${documentId}`
-    );
+// export const deletePdfDocument = async (
+//   documentId: string
+// ): Promise<IPdfResponseType> => {
+//   try {
+//     const { data } = await api.delete<IPdfUploadResponse>(
+//       `/documents/${documentId}`
+//     );
 
-    if (!data) {
-      throw new Error('Failed to delete PDF document');
-    }
+//     if (!data) {
+//       throw new Error('Failed to delete PDF document');
+//     }
 
-    return { data };
-  } catch (error) {
-    console.error('Error in deletePdfDocument:', error);
-    const errorMessage =
-      error instanceof Error ? error.message : 'Unknown error occurred';
-    return { error: errorMessage };
-  }
-};
+//     return { data };
+//   } catch (error) {
+//     console.error('Error in deletePdfDocument:', error);
+//     const errorMessage =
+//       error instanceof Error ? error.message : 'Unknown error occurred';
+//     return { error: errorMessage };
+//   }
+// };
