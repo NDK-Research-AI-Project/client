@@ -8,12 +8,18 @@ import {
 } from '@heroicons/react/24/outline';
 import { PaperAirplaneIcon } from '@heroicons/react/24/solid';
 import React, { useEffect, useRef, useState } from 'react';
-import { mockAIResponses } from '../../data/mockData';
+import { sendChatMessage } from '../../services/api/chat/chatServices';
+import { showError } from '../../utils/toaster';
+
+enum senderType {
+  ai = 'ai',
+  user = 'user',
+}
 
 interface Message {
   id: string;
   text: string;
-  sender: 'user' | 'ai';
+  sender: senderType;
   timestamp: Date;
 }
 
@@ -24,6 +30,7 @@ interface ChatProps {
 const NewChat: React.FC<ChatProps> = ({ className }) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputMessage, setInputMessage] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const handleSendMessage = async (e: React.FormEvent) => {
@@ -34,27 +41,65 @@ const NewChat: React.FC<ChatProps> = ({ className }) => {
     const userMessage: Message = {
       id: Date.now().toString(),
       text: inputMessage,
-      sender: 'user',
+      sender: senderType.user,
       timestamp: new Date(),
     };
 
     setMessages((prev) => [...prev, userMessage]);
     setInputMessage('');
 
-    // Simulate AI response after delay
-    const randomResponse =
-      mockAIResponses[Math.floor(Math.random() * mockAIResponses.length)];
+    setLoading(true);
 
-    setTimeout(() => {
+    const { data, error } = await sendChatMessage({
+      question: userMessage.text,
+    });
+
+    if (error) {
+      // TODO show err notification to user
+      showError(error);
+      setLoading(false);
+      console.error('Error sending message:', error);
+      return;
+    }
+
+    if (data) {
       const aiMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: randomResponse,
-        sender: 'ai',
+        text: data.answer,
+        sender: senderType.ai,
         timestamp: new Date(),
       };
-
+      setLoading(false);
       setMessages((prev) => [...prev, aiMessage]);
-    }, 1000);
+    }
+
+    // const sendUserPrompt = sendChatMessage({ question: userMessage.text }).then(
+    //   ({ data, error }) => {
+    //     if (error) {
+    //       // TODO show err notification to user
+    //       console.error('Error sending message:', error);
+    //       showError(error);
+    //       setLoading(false);
+    //       return;
+    //     }
+    //     if (data) {
+    //       const aiMessage: Message = {
+    //         id: (Date.now() + 1).toString(),
+    //         text: data.answer,
+    //         sender: senderType.ai,
+    //         timestamp: new Date(),
+    //       };
+    //       setLoading(false);
+    //       setMessages((prev) => [...prev, aiMessage]);
+    //     }
+    //   }
+    // );
+
+    // showPromise(sendUserPrompt, {
+    //   loading: 'Sending...',
+    //   success: 'Success!',
+    //   error: (error: string) => `${error}`,
+    // });
   };
 
   useEffect(() => {
@@ -80,7 +125,7 @@ const NewChat: React.FC<ChatProps> = ({ className }) => {
                     "
       ></div>
       <div className="flex items-center justify-between mb-4 border-b pb-3">
-        <h1 className="text-2xl font-bold">Lorem ipsum dolor sit</h1>
+        <h1 className="text-2xl font-bold">New chat</h1>
 
         <div className="flex items-center gap-1">
           <button className="flex justify-center items-center gap-1 py-2 px-3 mr-2 rounded-lg cursor-pointer bg-[#2777fb] text-white font-semibold text-sm ">
@@ -100,8 +145,15 @@ const NewChat: React.FC<ChatProps> = ({ className }) => {
         {messages.map((message) => (
           <MessageBlock key={message.id} message={message} />
         ))}
+        {loading && (
+          <div className="flex gap-8">
+            <div className="h-6 w-6 animate-spin rounded-full border-2 border-[#2777fb] border-t-transparent"></div>
+          </div>
+        )}
         <div ref={scrollRef} /> {/* Scroll to this div */}
       </div>
+
+      {/* Input field for sending messages */}
       <form onSubmit={handleSendMessage} className="border-t p-4">
         <div className="flex flex-row justify-between items-center px-3 py-3 gap-2 rounded-xl shadow-md w-full bg-white">
           <input

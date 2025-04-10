@@ -7,24 +7,46 @@ import {
   MagnifyingGlassIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { sampleDocuments } from '../../data/mockData';
+import { getAllPdfDocuments } from '../../services/api/pdf/pdfServices';
+import { showPromise } from '../../utils/toaster';
+import { formatDate } from '../../utils/dateTime';
 
 interface IDocument {
   id: string;
   name: string;
   fileType: string;
   uploadTime: string;
+  downloadUrl: string;
+}
+
+interface IPdfDocument {
+  _id: string;
+  filename: string;
+  numberOfPages: number;
+  fileSize: number;
+  fileType: string;
+  uploadDate: string;
+  azureBlobUrl: string;
+  azureBlobName: string;
+  downloadUrl: string;
 }
 
 const ViewDocument = () => {
   const navigate = useNavigate();
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [selectedDoc, setSelectedDoc] = useState<IDocument | null>(null);
+  const [documents, setDocuments] = useState<IPdfDocument[]>([]);
 
-  const handleSidebarOpen = (selectedDocument: IDocument) => {
-    setSelectedDoc(selectedDocument);
+  const handleSidebarOpen = ({
+    id,
+    name,
+    fileType,
+    uploadTime,
+    downloadUrl,
+  }: IDocument) => {
+    setSelectedDoc({ id, name, fileType, uploadTime, downloadUrl });
     setIsCollapsed(false);
   };
 
@@ -32,6 +54,36 @@ const ViewDocument = () => {
     setSelectedDoc(null);
     setIsCollapsed(true);
   };
+
+  const fetchDocuments = async () => {
+    const getAllDocumentsPromise = getAllPdfDocuments().then(
+      ({ documents, error }) => {
+        if (error) {
+          throw new Error(error);
+        }
+
+        if (documents) {
+          setDocuments(documents);
+        }
+      }
+    );
+
+    showPromise(getAllDocumentsPromise, {
+      loading: 'Getting all the PDFs...',
+      success: 'Success!',
+      error: (error: string) => `${error}`,
+    });
+  };
+
+  // Add this near your other state variables
+  const hasLoadedRef = useRef(false);
+
+  useEffect(() => {
+    if (!hasLoadedRef.current) {
+      fetchDocuments();
+      hasLoadedRef.current = true;
+    }
+  }, []);
 
   return (
     <div className="flex flex-col h-full border border-[#e3e6ea] rounded-2xl">
@@ -60,7 +112,9 @@ const ViewDocument = () => {
           {/* Search Bar - Fixed */}
           <div className="p-4 ">
             <div className="flex justify-between items-center w-full">
-              <p className="text-base font-semibold">All documents(14)</p>
+              <p className="text-base font-semibold">
+                All documents{' (' + documents.length + ')'}
+              </p>
               <div className="flex items-center gap-2 px-3 py-3 shadow-lg rounded-lg bg-white">
                 <MagnifyingGlassIcon className="w-4 h-4" />
                 <input
@@ -75,15 +129,22 @@ const ViewDocument = () => {
           {/* Documents List - Scrollable */}
           <div className="flex-1 overflow-y-auto p-4">
             <div className="flex flex-col gap-2">
-              {sampleDocuments.map((doc) => (
+              {documents.length === 0 && (
+                <div className="flex items-center justify-center h-full">
+                  <p className="text-gray-500">No documents available</p>
+                </div>
+              )}
+
+              {documents.map((doc) => (
                 <DocumentCard
-                  key={doc.id}
+                  key={doc._id}
                   handleClick={handleSidebarOpen}
-                  isSelected={selectedDoc?.id === doc.id}
-                  id={doc.id}
-                  name={doc.name}
+                  isSelected={selectedDoc?.id === doc._id}
+                  id={doc._id}
+                  name={doc.filename}
                   fileType={doc.fileType}
-                  uploadTime={doc.uploadTime}
+                  uploadTime={formatDate(doc.uploadDate)}
+                  downloadUrl={doc.downloadUrl}
                 />
               ))}
             </div>
@@ -101,7 +162,7 @@ const ViewDocument = () => {
                   <XMarkIcon className="w-5 h-5 " />
                 </button>
                 <div className="flex flex-col items-center justify-between  gap-4 h-full">
-                  <div className="flex flex-col items-center  gap-4">
+                  <div className="flex flex-col items-center w-full  gap-4">
                     {/* Icon and File Name */}
                     <div className="flex flex-col gap-4 items-center my-4">
                       <DocumentTextIcon className="w-20 h-20" />
@@ -111,21 +172,25 @@ const ViewDocument = () => {
                     </div>
 
                     {/* Description */}
-                    <div className="w-full">
+                    {/* <div className="w-full">
                       <p className="font-semibold text-sm mb-1">Description</p>
                       <p className="text-sm text-[#666f8d]">
                         This is a detailed description of the document. It
                         provides more context and information about the
                         document.
                       </p>
-                    </div>
+                    </div> */}
 
                     {/* File Type */}
                     <div className="w-full">
                       <p className="font-semibold text-sm mb-1">File type</p>
                       <div className="flex items-center gap-1 text-[#666f8d]">
                         <DocumentIcon className="w-4 h-4" />
-                        <p>{selectedDoc?.fileType}</p>
+                        <p>
+                          {selectedDoc?.fileType === 'application/pdf'
+                            ? 'PDF'
+                            : selectedDoc?.fileType}
+                        </p>
                       </div>
                     </div>
 
@@ -146,10 +211,15 @@ const ViewDocument = () => {
                     <button className="flex-1 flex items-center justify-center gap-1 py-2 px-3 rounded-lg bg-red-500 text-white font-semibold text-sm">
                       Delete
                     </button>
-                    <button className="flex-1 flex items-center justify-center gap-1 py-2 px-3 rounded-lg bg-[#2777fb] text-white font-semibold text-sm">
+                    <a
+                      href={selectedDoc?.downloadUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 flex items-center justify-center gap-1 py-2 px-3 rounded-lg bg-[#2777fb] text-white font-semibold text-sm cursor-pointer"
+                    >
                       <ArrowTopRightOnSquareIcon className="w-4 h-4" />
                       Open
-                    </button>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -168,6 +238,7 @@ interface DocumentCardProps {
   name: string;
   fileType: string;
   uploadTime: string;
+  downloadUrl: string;
 }
 
 const DocumentCard = ({
@@ -177,13 +248,16 @@ const DocumentCard = ({
   name,
   fileType,
   uploadTime,
+  downloadUrl,
 }: DocumentCardProps) => {
   return (
     <div
       className={`grid grid-cols-[1fr_60px_190px_40px] gap-4 items-center bg-white shadow-md rounded-lg p-3 w-full text-sm cursor-pointer hover:shadow-xl hover:scale-[1.02] transition-all duration-300 ${
         isSelected ? 'border-2 border-[#2777fb]' : ''
       }`}
-      onClick={() => handleClick({ id, name, fileType, uploadTime })}
+      onClick={() =>
+        handleClick({ id, name, fileType, uploadTime, downloadUrl })
+      }
     >
       <div className="flex items-center gap-4 min-w-0">
         <DocumentTextIcon className="w-5 h-5 flex-shrink-0" />
@@ -192,7 +266,9 @@ const DocumentCard = ({
 
       <div className="flex items-center gap-1 justify-start text-[#666f8d]">
         <DocumentIcon className="w-4 h-4 flex-shrink-0" />
-        <p className="truncate">{fileType}</p>
+        <p className="truncate">
+          {fileType === 'application/pdf' ? 'PDF' : fileType}
+        </p>
       </div>
 
       <div className="flex items-center gap-1 justify-end text-[#666f8d]">
