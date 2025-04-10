@@ -106,7 +106,6 @@ const ViewGlossary = () => {
                   {glossaries.map((glo, idx) => (
                     <GlossaryCard
                       key={idx}
-                      id={idx}
                       term={glo.term}
                       description={glo.definition}
                     />
@@ -125,12 +124,11 @@ const ViewGlossary = () => {
 export default ViewGlossary;
 
 interface GlossaryCardProps {
-  id: number;
   term: string;
   description: string;
 }
 
-const GlossaryCard = ({ id, term, description }: GlossaryCardProps) => {
+const GlossaryCard = ({ term, description }: GlossaryCardProps) => {
   return (
     <div
       className={`grid grid-cols-[1fr_1150px] gap-4 items-center bg-white shadow-md rounded-lg p-3 w-full text-sm cursor-pointer hover:shadow-xl hover:scale-[1.02] transition-all duration-300 
