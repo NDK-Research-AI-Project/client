@@ -1,5 +1,3 @@
-// API service for handling chat requests
-
 import { api } from '../../axios/api';
 
 interface IChatResponse {
