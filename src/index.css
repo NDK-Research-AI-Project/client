@@ -24,7 +24,7 @@
   --text-button-primary: #ffffff;
 
   --gray-hover: rgb(236, 236, 236);
-  --background-secondary-hover: rgb(247, 248, 250);
+  --background-secondary-hover: rgb(243, 243, 243);
   /* Brand colors */
   --accent-primary: #3b82f6;
   --accent-secondary: #f7f8fa;
@@ -80,6 +80,236 @@
   --ai-prompt-send-background: #ffffff11;
 }
 
+/* DARK THEME: GREEN */
+.dark.green {
+  --background-primary: #0f2d26;
+  --background-secondary: #173c33;
+  --border-primary: #285f4d;
+
+  --text-primary: #e6f4f1;
+  --text-secondary: #9bd1c1;
+  --text-button-primary: #ffffff;
+
+  --gray-hover: #204a3c;
+  --background-secondary-hover: #1a3f35;
+
+  --accent-primary: #10b981;
+  --accent-primary-hover: #34d399;
+  --accent-secondary: #173c33;
+  --accent-secondary-hover: #285f4d;
+
+  --disabled: #35584c;
+  --disabled-text: #67a39a;
+
+  --input-text: #c7f6e9;
+  --input-background: #173c33;
+  --input-border: #285f4d;
+
+  --ai-answer-background: #ffffff11;
+  --ai-prompt-send-background: #ffffff11;
+}
+
+/* DARK THEME: RED */
+.dark.red {
+  --background-primary: #2a0f14;
+  --background-secondary: #3b1e22;
+  --border-primary: #553336;
+
+  --text-primary: #fae8e8;
+  --text-secondary: #fca5a5;
+  --text-button-primary: #ffffff;
+
+  --gray-hover: #502e34;
+  --background-secondary-hover: #421c22;
+
+  --accent-primary: #ef4444;
+  --accent-primary-hover: #f87171;
+  --accent-secondary: #3b1e22;
+  --accent-secondary-hover: #553336;
+
+  --disabled: #6b3b41;
+  --disabled-text: #fca5a5;
+
+  --input-text: #fcdede;
+  --input-background: #3b1e22;
+  --input-border: #553336;
+
+  --ai-answer-background: #ffffff11;
+  --ai-prompt-send-background: #ffffff11;
+}
+
+/* DARK THEME: YELLOW */
+.dark.yellow {
+  --background-primary: #2a250f;
+  --background-secondary: #3b331e;
+  --border-primary: #554f33;
+
+  --text-primary: #faf6e8;
+  --text-secondary: #facc15;
+  --text-button-primary: #1e1e1e;
+
+  --gray-hover: #514b2e;
+  --background-secondary-hover: #423d1c;
+
+  --accent-primary: #facc15;
+  --accent-primary-hover: #fde047;
+  --accent-secondary: #3b331e;
+  --accent-secondary-hover: #554f33;
+
+  --disabled: #6b653b;
+  --disabled-text: #fcd34d;
+
+  --input-text: #fdf3c7;
+  --input-background: #3b331e;
+  --input-border: #554f33;
+
+  --ai-answer-background: #ffffff11;
+  --ai-prompt-send-background: #ffffff11;
+}
+
+/* DARK THEME: PURPLE */
+.dark.purple {
+  --background-primary: #1f1433;
+  --background-secondary: #2e1e4a;
+  --border-primary: #4c3b73;
+
+  --text-primary: #ede9fe;
+  --text-secondary: #c4b5fd;
+  --text-button-primary: #ffffff;
+
+  --gray-hover: #3c2e61;
+  --background-secondary-hover: #2b2352;
+
+  --accent-primary: #8b5cf6;
+  --accent-primary-hover: #a78bfa;
+  --accent-secondary: #2e1e4a;
+  --accent-secondary-hover: #4c3b73;
+
+  --disabled: #5b4c78;
+  --disabled-text: #c4b5fd;
+
+  --input-text: #e3d9fb;
+  --input-background: #2e1e4a;
+  --input-border: #4c3b73;
+
+  --ai-answer-background: #ffffff11;
+  --ai-prompt-send-background: #ffffff11;
+}
+
+/* LIGHT THEME: BLUE */
+.light.blue {
+  --background-primary: #ffffff;
+  --background-secondary: #f7f8fa;
+  --border-primary: #e5e7eb;
+  --text-primary: #1e1e1e;
+  --text-secondary: #666f8d;
+  --text-button-primary: #ffffff;
+  --gray-hover: #ececec;
+
+  --accent-primary: #3b82f6;
+  --accent-primary-hover: #5796fa;
+  --accent-secondary: #f7f8fa;
+  --accent-secondary-hover: #e4e4e4;
+  --disabled: #e5e7eb;
+  --disabled-text: #a1a1aa;
+  --input-text: #4d5268;
+  --input-background: #ffffff;
+  --input-border: #e5e7eb;
+  --ai-answer-background: #ffffff;
+  --ai-prompt-send-background: #ffffff;
+}
+
+/* LIGHT THEME: GREEN */
+.light.green {
+  --background-primary: #f0fdf4;
+  --background-secondary: #dcfce7;
+  --border-primary: #bbf7d0;
+  --text-primary: #14532d;
+  --text-secondary: #166534;
+  --text-button-primary: #ffffff;
+  --gray-hover: #e4fce8;
+  --background-secondary-hover: #c7f7d6;
+  --accent-primary: #10b981;
+  --accent-primary-hover: #34d399;
+  --accent-secondary: #dcfce7;
+  --accent-secondary-hover: #bbf7d0;
+  --disabled: #bbf7d0;
+  --disabled-text: #6ee7b7;
+  --input-text: #065f46;
+  --input-background: #ffffff;
+  --input-border: #bbf7d0;
+  --ai-answer-background: #ffffff;
+  --ai-prompt-send-background: #ffffff;
+}
+
+/* LIGHT THEME: RED */
+.light.red {
+  --background-primary: #fef2f2;
+  --background-secondary: #fee2e2;
+  --border-primary: #fecaca;
+  --text-primary: #7f1d1d;
+  --text-secondary: #991b1b;
+  --text-button-primary: #ffffff;
+  --gray-hover: #fddddd;
+  --background-secondary-hover: #fcbaba;
+  --accent-primary: #ef4444;
+  --accent-primary-hover: #f87171;
+  --accent-secondary: #fee2e2;
+  --accent-secondary-hover: #fecaca;
+  --disabled: #fecaca;
+  --disabled-text: #fca5a5;
+  --input-text: #7f1d1d;
+  --input-background: #ffffff;
+  --input-border: #fecaca;
+  --ai-answer-background: #ffffff;
+  --ai-prompt-send-background: #ffffff;
+}
+
+/* LIGHT THEME: YELLOW */
+.light.yellow {
+  --background-primary: #fefce8;
+  --background-secondary: #fef9c3;
+  --border-primary: #fef08a;
+  --text-primary: #78350f;
+  --text-secondary: #a16207;
+  --text-button-primary: #1e1e1e;
+  --gray-hover: #fef4b8;
+  --background-secondary-hover: #fde68a;
+  --accent-primary: #facc15;
+  --accent-primary-hover: #fde047;
+  --accent-secondary: #fef9c3;
+  --accent-secondary-hover: #fef08a;
+  --disabled: #fde68a;
+  --disabled-text: #facc15;
+  --input-text: #78350f;
+  --input-background: #ffffff;
+  --input-border: #fef08a;
+  --ai-answer-background: #ffffff;
+  --ai-prompt-send-background: #ffffff;
+}
+
+/* LIGHT THEME: PURPLE */
+.light.purple {
+  --background-primary: #f5f3ff;
+  --background-secondary: #ede9fe;
+  --border-primary: #ddd6fe;
+  --text-primary: #4c1d95;
+  --text-secondary: #6b21a8;
+  --text-button-primary: #ffffff;
+  --gray-hover: #e9e4fe;
+  --background-secondary-hover: #dcd0fa;
+  --accent-primary: #8b5cf6;
+  --accent-primary-hover: #a78bfa;
+  --accent-secondary: #ede9fe;
+  --accent-secondary-hover: #ddd6fe;
+  --disabled: #ddd6fe;
+  --disabled-text: #c4b5fd;
+  --input-text: #4c1d95;
+  --input-background: #ffffff;
+  --input-border: #ddd6fe;
+  --ai-answer-background: #ffffff;
+  --ai-prompt-send-background: #ffffff;
+}
 /* Basic styles */
 body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
