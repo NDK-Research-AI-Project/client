@@ -51,7 +51,7 @@ export const getAllGlossaries = async (): Promise<IGetAllGlossaryResponse> => {
   } catch (error: any) {
     console.error('Error in getAllGlossaries:', error);
     const errorMessage =
-      error?.response?.data?.error || 'Failed to retrieve PDF documents';
+      error?.response?.data?.error || 'Failed to retrieve glossaries...';
     return { error: errorMessage };
   }
 };
