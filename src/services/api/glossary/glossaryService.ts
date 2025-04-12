@@ -23,7 +23,8 @@ export const uploadGlossaries = async (
     return { data };
   } catch (error: any) {
     console.error('Error in uploadGlossaries:', error);
-    const errorMessage = error.response.data.error || 'Unknown error occurred';
+    const errorMessage =
+      error?.response?.data?.error || 'Unknown error occurred';
     return { error: errorMessage };
   }
 };
@@ -50,7 +51,7 @@ export const getAllGlossaries = async (): Promise<IGetAllGlossaryResponse> => {
   } catch (error: any) {
     console.error('Error in getAllGlossaries:', error);
     const errorMessage =
-      error.response.data.error || 'Failed to retrieve PDF documents';
+      error?.response?.data?.error || 'Failed to retrieve PDF documents';
     return { error: errorMessage };
   }
 };
