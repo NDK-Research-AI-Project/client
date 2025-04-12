@@ -18,7 +18,7 @@ const RootLayout: React.FC<RootLayoutProps> = ({
   const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
 
   return (
-    <div className={`flex h-screen ${className}`}>
+    <div className={`flex h-screen ${className} bg-background-primary`}>
       <Sidebar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} />
       <main
         className={`

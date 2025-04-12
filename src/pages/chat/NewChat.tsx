@@ -108,10 +108,10 @@ const NewChat: React.FC<ChatProps> = ({ className }) => {
 
   return (
     <div
-      className={`flex flex-col h-full ${className} border border-[#e3e6ea] rounded-2xl py-4 px-5 relative`}
+      className={`flex flex-col h-full ${className} border border-border-primary rounded-2xl py-4 px-5 relative`}
     >
       <div
-        className="
+        className=" 
                       blur-3xl
                       absolute 
                       bottom-8
@@ -120,51 +120,54 @@ const NewChat: React.FC<ChatProps> = ({ className }) => {
                       w-3/4
                       h-3/4
                       rounded-t-full
-                      z-[-2]
+                      z-[1]
                       bg-[radial-gradient(circle_at_bottom,rgba(50,119,251,0.2)_55%,rgba(130,150,254,0.15)_40%,rgba(135,180,255,0.1)_80%,rgba(255,255,255,0)_100%)]
                     "
       ></div>
-      <div className="flex items-center justify-between mb-4 border-b pb-3">
-        <h1 className="text-2xl font-bold">New chat</h1>
+      <div className="flex items-center justify-between mb-4 border-b border-border-primary pb-3   z-[2]">
+        <h1 className="text-2xl font-bold text-text-primary">New chat</h1>
 
         <div className="flex items-center gap-1">
-          <button className="flex justify-center items-center gap-1 py-2 px-3 mr-2 rounded-lg cursor-pointer bg-[#2777fb] text-white font-semibold text-sm ">
+          <button className="flex justify-center items-center gap-1 py-2 px-3 mr-2 rounded-lg cursor-pointer bg-accent-primary text-text-button-primary font-semibold text-sm ">
             <PlusIcon className="w-4 h-4 " />
             New chat
           </button>
-          <div className="border-r h-6"></div>
-          <button className=" p-1 rounded-lg  hover:bg-gray-200 text-[#666f8d]">
+          <div className="border-r border-border-primary h-6"></div>
+          <button className=" p-1 rounded-lg  hover:bg-gray-hover text-text-secondary">
             <TrashIcon className="w-5 h-5 cursor-pointer" />
           </button>
-          <button className=" p-1 rounded-lg  hover:bg-gray-200 text-[#666f8d]">
+          <button className=" p-1 rounded-lg  hover:bg-gray-hover text-text-secondary">
             <ShareIcon className="w-5 h-5 cursor-pointer" />
           </button>
         </div>
       </div>
-      <div className="flex-1 overflow-y-auto p-4">
+      <div className="flex-1 overflow-y-auto p-4   z-[2]">
         {messages.map((message) => (
           <MessageBlock key={message.id} message={message} />
         ))}
         {loading && (
           <div className="flex gap-8">
-            <div className="h-6 w-6 animate-spin rounded-full border-2 border-[#2777fb] border-t-transparent"></div>
+            <div className="h-6 w-6 animate-spin rounded-full border-2  border-accent-primary border-t-transparent"></div>
           </div>
         )}
         <div ref={scrollRef} /> {/* Scroll to this div */}
       </div>
 
       {/* Input field for sending messages */}
-      <form onSubmit={handleSendMessage} className="border-t p-4">
-        <div className="flex flex-row justify-between items-center px-3 py-3 gap-2 rounded-xl shadow-md w-full bg-white">
+      <form
+        onSubmit={handleSendMessage}
+        className="border-t border-border-primary p-4   z-[2]"
+      >
+        <div className="flex flex-row justify-between items-center px-3 py-3 gap-2 rounded-xl shadow-md w-full bg-ai-prompt-send-background border border-border-primary">
           <input
             type="text"
             placeholder="How can I help you today?"
-            className="w-full border-0 text-sm focus:outline-none pl-2 "
+            className="w-full border-0 text-sm focus:outline-none pl-2 bg-transparent text-text-primary"
             value={inputMessage}
             onChange={(e) => setInputMessage(e.target.value)}
           />
           <button
-            className="flex justify-center items-center gap-2 py-2 px-3 mr-2 rounded-lg cursor-pointer bg-[#2777fb] text-white font-semibold text-sm "
+            className="flex justify-center items-center gap-2 py-2 px-3 mr-2 rounded-lg cursor-pointer bg-accent-primary text-text-button-primary font-semibold text-sm "
             type="submit"
           >
             Send
@@ -190,20 +193,20 @@ export const MessageBlock: React.FC<{ message: Message }> = ({ message }) => {
           />
           <div className="flex flex-col">
             <div className="flex items-center gap-2">
-              <p className="font-semibold">Sam Walton</p>
-              <div className="border-r h-6"></div>
-              <p className="text-[#666f8d]">
+              <p className="font-semibold text-text-primary">Sam Walton</p>
+              <div className="border-r h-6 border-border-primary"></div>
+              <p className="text-text-secondary">
                 {message.timestamp.toLocaleTimeString()}
               </p>
             </div>
 
-            <p className="text-sm text-[#666f8d] mt-2">{message.text}</p>
+            <p className="text-sm text-text-secondary mt-2">{message.text}</p>
           </div>
         </div>
       )}
 
       {message.sender === 'ai' && (
-        <div className="flex flex-col justify-start items-start gap-2 text-sm shadow-lg p-5 rounded-xl bg-white ">
+        <div className="flex flex-col justify-start items-start gap-2 text-sm bg-ai-answer-background border border-border-primary p-5 rounded-xl  ">
           <div className="flex items-start gap-2 text-sm ">
             <img
               className="w-7 h-7 rounded-full mb-4"
@@ -212,28 +215,28 @@ export const MessageBlock: React.FC<{ message: Message }> = ({ message }) => {
             />
             <div className="flex flex-col">
               <div className="flex items-center gap-2">
-                <p className="font-semibold">Your AI</p>
+                <p className="font-semibold text-text-primary">Your AI</p>
                 <div className="border-r h-6"></div>
-                <p className="text-[#666f8d]">
+                <p className="text-text-secondary">
                   {message.timestamp.toLocaleTimeString()}
                 </p>
               </div>
 
-              <p className="text-sm text-[#666f8d] mt-2">{message.text}</p>
+              <p className="text-sm text-text-primary mt-2">{message.text}</p>
             </div>
           </div>
 
           <div className="flex items-center gap-2 mt-4">
-            <button className=" p-1 rounded-lg  hover:bg-gray-200 text-[#666f8d]">
+            <button className=" p-1 rounded-lg  hover:bg-gray-hover text-text-secondary">
               <ArrowPathIcon className="w-5 h-5 cursor-pointer" />
             </button>
-            <button className=" p-1 rounded-lg  hover:bg-gray-200 text-[#666f8d]">
+            <button className=" p-1 rounded-lg  hover:bg-gray-hover text-text-secondary">
               <ShareIcon className="w-5 h-5 cursor-pointer" />
             </button>
-            <button className=" p-1 rounded-lg  hover:bg-gray-200 text-[#666f8d]">
+            <button className=" p-1 rounded-lg  hover:bg-gray-hover text-text-secondary">
               <Square2StackIcon className="w-5 h-5 cursor-pointer" />
             </button>
-            <button className=" p-1 rounded-lg  hover:bg-gray-200 text-[#666f8d]">
+            <button className=" p-1 rounded-lg  hover:bg-gray-hover text-text-secondary">
               <EllipsisVerticalIcon className="w-5 h-5 cursor-pointer" />
             </button>
           </div>

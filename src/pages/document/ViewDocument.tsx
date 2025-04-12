@@ -86,12 +86,12 @@ const ViewDocument = () => {
   }, []);
 
   return (
-    <div className="flex flex-col h-full border border-[#e3e6ea] rounded-2xl">
+    <div className="flex flex-col h-full border rounded-2xl border-border-primary bg-background-primary">
       {/* Header - Fixed */}
-      <div className="flex items-center justify-between border-b p-4">
-        <h1 className="text-2xl font-bold">Documents</h1>
+      <div className="flex items-center justify-between border-b p-4 border-border-primary">
+        <h1 className="text-2xl font-bold text-text-primary">Documents</h1>
         <button
-          className="flex justify-center items-center gap-1 py-2 px-3 rounded-lg cursor-pointer bg-[#2777fb] text-white font-semibold text-sm"
+          className="flex justify-center items-center gap-1 py-2 px-3 rounded-lg cursor-pointer bg-accent-primary text-text-button-primary font-semibold text-sm"
           onClick={() => navigate('/document/upload')}
         >
           <ArrowUpOnSquareIcon className="w-4 h-4" />
@@ -112,15 +112,15 @@ const ViewDocument = () => {
           {/* Search Bar - Fixed */}
           <div className="p-4 ">
             <div className="flex justify-between items-center w-full">
-              <p className="text-base font-semibold">
+              <p className="text-base font-semibold text-text-primary">
                 All documents{' (' + documents.length + ')'}
               </p>
-              <div className="flex items-center gap-2 px-3 py-3 shadow-lg rounded-lg bg-white">
-                <MagnifyingGlassIcon className="w-4 h-4" />
+              <div className="flex items-center gap-2 px-3 py-3 shadow-lg rounded-lg bg-input-background border border-border-primary">
+                <MagnifyingGlassIcon className="w-4 h-4 text-input-text" />
                 <input
                   placeholder="Search documents..."
                   type="text"
-                  className="text-sm focus:outline-none"
+                  className="text-sm focus:outline-none  bg-input-background text-input-text"
                 />
               </div>
             </div>
@@ -152,19 +152,19 @@ const ViewDocument = () => {
         </div>
         {/* Sidebar - Fixed */}
         {!isCollapsed && (
-          <div className="w-3/12 bg-white overflow-y-auto h-full ">
+          <div className="w-3/12 bg-background-primary overflow-y-auto h-full ">
             <div className="sticky top-0 p-4 h-full">
-              <div className="border rounded-xl p-5 h-full relative">
+              <div className="border rounded-xl p-5 h-full relative border-border-primary">
                 <button
-                  className="absolute flex justify-end p-2 hover:bg-gray-200 top-1 right-1 rounded-lg"
+                  className="absolute flex justify-end p-2 hover:bg-gray-hover top-1 right-1 rounded-lg"
                   onClick={handleSidebarClose}
                 >
-                  <XMarkIcon className="w-5 h-5 " />
+                  <XMarkIcon className="w-5 h-5 text-text-primary" />
                 </button>
                 <div className="flex flex-col items-center justify-between  gap-4 h-full">
                   <div className="flex flex-col items-center w-full  gap-4">
                     {/* Icon and File Name */}
-                    <div className="flex flex-col gap-4 items-center my-4">
+                    <div className="flex flex-col gap-4 items-center my-4 text-text-primary">
                       <DocumentTextIcon className="w-20 h-20" />
                       <p className="font-semibold text-lg">
                         {selectedDoc?.name}
@@ -183,8 +183,10 @@ const ViewDocument = () => {
 
                     {/* File Type */}
                     <div className="w-full">
-                      <p className="font-semibold text-sm mb-1">File type</p>
-                      <div className="flex items-center gap-1 text-[#666f8d]">
+                      <p className="font-semibold text-sm mb-1 text-text-primary">
+                        File type
+                      </p>
+                      <div className="flex items-center gap-1 text-text-secondary">
                         <DocumentIcon className="w-4 h-4" />
                         <p>
                           {selectedDoc?.fileType === 'application/pdf'
@@ -196,10 +198,10 @@ const ViewDocument = () => {
 
                     {/* Upload Time */}
                     <div className="w-full">
-                      <p className="font-semibold text-sm mb-1">
+                      <p className="font-semibold text-sm mb-1 text-text-primary">
                         Uploaded time
                       </p>
-                      <div className="flex items-center gap-1 text-[#666f8d]">
+                      <div className="flex items-center gap-1 text-text-secondary">
                         <ClockIcon className="w-4 h-4" />
                         <p>{selectedDoc?.uploadTime}</p>
                       </div>
@@ -215,7 +217,7 @@ const ViewDocument = () => {
                       href={selectedDoc?.downloadUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 flex items-center justify-center gap-1 py-2 px-3 rounded-lg bg-[#2777fb] text-white font-semibold text-sm cursor-pointer"
+                      className="flex-1 flex items-center justify-center gap-1 py-2 px-3 rounded-lg bg-accent-primary text-text-button-primary font-semibold text-sm cursor-pointer"
                     >
                       <ArrowTopRightOnSquareIcon className="w-4 h-4" />
                       Open
@@ -252,32 +254,32 @@ const DocumentCard = ({
 }: DocumentCardProps) => {
   return (
     <div
-      className={`grid grid-cols-[1fr_60px_190px_40px] gap-4 items-center bg-white shadow-md rounded-lg p-3 w-full text-sm cursor-pointer hover:shadow-xl hover:scale-[1.02] transition-all duration-300 ${
-        isSelected ? 'border-2 border-[#2777fb]' : ''
+      className={`grid grid-cols-[1fr_60px_190px_40px] gap-4 items-center bg-background-secondary border border-border-primary rounded-lg p-3 w-full text-sm cursor-pointer hover:shadow-xl hover:scale-[1.02] transition-all duration-300 ${
+        isSelected ? 'border-2 border-accent-primary' : ''
       }`}
       onClick={() =>
         handleClick({ id, name, fileType, uploadTime, downloadUrl })
       }
     >
-      <div className="flex items-center gap-4 min-w-0">
+      <div className="flex items-center gap-4 min-w-0 text-text-primary">
         <DocumentTextIcon className="w-5 h-5 flex-shrink-0" />
         <p className="font-semibold truncate">{name}</p>
       </div>
 
-      <div className="flex items-center gap-1 justify-start text-[#666f8d]">
+      <div className="flex items-center gap-1 justify-start text-text-secondary">
         <DocumentIcon className="w-4 h-4 flex-shrink-0" />
         <p className="truncate">
           {fileType === 'application/pdf' ? 'PDF' : fileType}
         </p>
       </div>
 
-      <div className="flex items-center gap-1 justify-end text-[#666f8d]">
+      <div className="flex items-center gap-1 justify-end text-text-secondary">
         <ClockIcon className="w-4 h-4 flex-shrink-0" />
         <p className="truncate">{uploadTime}</p>
       </div>
 
-      <button className="flex justify-center hover:bg-gray-200 rounded-lg p-2">
-        <ArrowTopRightOnSquareIcon className="w-4 h-4 text-[#666f8d]" />
+      <button className="flex justify-center hover:bg-gray-hover rounded-lg p-2">
+        <ArrowTopRightOnSquareIcon className="w-4 h-4 text-text-secondary" />
       </button>
     </div>
   );

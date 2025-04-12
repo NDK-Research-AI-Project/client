@@ -103,11 +103,11 @@ const UploadDocument = () => {
   return (
     <>
       <div
-        className={`flex flex-col h-full  border border-[#e3e6ea] rounded-2xl py-4 px-5`}
+        className={`flex flex-col h-full  border border-border-primary rounded-2xl py-4 px-5 bg-background-primary`}
       >
-        <div className="flex items-center justify-start gap-3 border-b pb-3 mb-5">
+        <div className="flex items-center justify-start gap-3 border-b border-border-primary pb-3 mb-5 text-text-primary">
           <button
-            className="flex justify-center items-center gap-1 py-2 px-4 rounded-lg cursor-pointer bg-[#f7f8fa] text-[#1e1e1e] font-semibold text-sm border"
+            className="flex justify-center items-center gap-1 py-2 px-4 rounded-lg cursor-pointer bg-background-secondary font-semibold text-sm border border-border-primary"
             onClick={() => navigate('/document/view')}
           >
             <span>
@@ -121,10 +121,10 @@ const UploadDocument = () => {
 
         <div className="flex-1 overflow-y-auto transition-all duration-300">
           {!isUploading && (
-            <div className="rounded-xl border border-stroke bg-white shadow-default ">
-              <div className="border-b border-stroke py-6 px-7  flex justify-start items-center gap-3">
+            <div className="rounded-xl border border-stroke bg-background-primary border-border-primary shadow-default ">
+              <div className="border-b border-stroke border-border-primary  py-6 px-7  flex justify-start items-center gap-3 text-text-primary">
                 <DocumentTextIcon className="w-6 h-6" />
-                <h3 className="text-base font-semibold text-[#1e1e1e] ">
+                <h3 className="text-base font-semibold  ">
                   Upload your document
                 </h3>
               </div>
@@ -132,7 +132,7 @@ const UploadDocument = () => {
                 <form action="#">
                   <div
                     id="FileUpload"
-                    className="relative mb-5.5 block w-full cursor-pointer appearance-none rounded border border-dashed border-[#a1a1a1] bg-[#f7f8fa] py-9 px-4  sm:py-7.5"
+                    className="relative mb-5.5 block w-full cursor-pointer appearance-none rounded border border-dashed border-[#a1a1a1] bg-background-secondary py-9 px-4  sm:py-7.5"
                   >
                     {/* Drag and drop area */}
                     <input
@@ -144,7 +144,7 @@ const UploadDocument = () => {
                       className="absolute inset-0 z-50 m-0 h-full w-full cursor-pointer p-0 opacity-0 outline-none"
                     />
                     <div className="flex flex-col items-center justify-center space-y-3">
-                      <span className="flex h-10 w-10 items-center justify-center rounded-full border border-stroke  bg-white ">
+                      <span className="flex h-10 w-10 items-center justify-center rounded-full  border-stroke  bg-background-primary border-border-primary ">
                         <svg
                           width="16"
                           height="16"
@@ -172,13 +172,15 @@ const UploadDocument = () => {
                           />
                         </svg>
                       </span>
-                      <p>
+                      <p className="text-text-secondary">
                         <span className="text-primary">
                           <u>Click here to upload</u>
                         </span>{' '}
                         or drag and drop
                       </p>
-                      <p className="mt-1.5">PDF documents only</p>
+                      <p className="mt-1.5 text-text-secondary">
+                        PDF documents only
+                      </p>
                     </div>
                   </div>
                 </form>
@@ -219,13 +221,13 @@ const UploadDocument = () => {
             {!isUploading && (
               <>
                 <button
-                  className="flex justify-center rounded-lg cursor-pointer py-2 px-3 font-semibold text-sm text-[#1e1e1e] hover:shadow-1 border"
+                  className="flex justify-center rounded-lg cursor-pointer py-2 px-3 font-semibold text-sm text-text-primary hover:shadow-1 border border-border-primary disabled:bg-disabled disabled:text-disabled-text"
                   onClick={handleClearAll}
                 >
                   Clear Selection
                 </button>
                 <button
-                  className="flex justify-center items-center gap-1 py-2 px-4  rounded-lg cursor-pointer bg-[#2777fb] text-white font-semibold text-sm "
+                  className="flex justify-center items-center gap-1 py-2 px-4  rounded-lg cursor-pointer bg-accent-primary text-text-button-primary font-semibold text-sm disabled:bg-disabled disabled:text-disabled-text"
                   onClick={uploadFile}
                 >
                   <span>
@@ -265,31 +267,31 @@ const UploadDocumentCard = ({
 }: DocumentCardProps) => {
   return (
     <div
-      className={`grid grid-cols-[1fr_100px_60px_210px__40px] gap-4 items-center mb-1 bg-white shadow-md rounded-lg p-3 w-full text-sm cursor-pointer hover:shadow-xl transition-all duration-300 ${
+      className={`grid grid-cols-[1fr_100px_60px_210px__40px] gap-4 items-center mb-1 bg-background-secondary border-border-primary border rounded-lg p-3 w-full text-sm cursor-pointer hover:shadow-xl transition-all duration-300 ${
         error ? 'border-2 border-[#f87171]' : ''
       }`}
     >
-      <div className="flex items-center gap-4 min-w-0">
+      <div className="flex items-center gap-4 min-w-0 text-text-primary">
         <DocumentTextIcon className="w-5 h-5 flex-shrink-0" />
         <p className="font-semibold truncate">{name}</p>
       </div>
 
-      <div className="flex items-center gap-1 justify-start text-[#666f8d]">
+      <div className="flex items-center gap-1 justify-start text-text-secondary">
         <CircleStackIcon className="w-4 h-4 flex-shrink-0" />
         <p className="truncate">{formatFileSize(size)}</p>
       </div>
 
-      <div className="flex items-center gap-1 justify-start text-[#666f8d]">
+      <div className="flex items-center gap-1 justify-start text-text-secondary">
         <DocumentIcon className="w-4 h-4 flex-shrink-0" />
         <p className="truncate">
           {fileType === 'application/pdf' ? FileType.PDF : FileType.OTHER}
         </p>
       </div>
 
-      <div className="flex items-center gap-1 justify-end text-[#666f8d]">
-        <div className="w-full bg-gray-200 rounded-full h-2.5 ">
+      <div className="flex items-center gap-1 justify-end text-text-secondary">
+        <div className="w-full bg-gray-hover rounded-full h-2.5 ">
           <div
-            className="bg-blue-600 h-2.5 rounded-full"
+            className="bg-accent-primary h-2.5 rounded-full"
             style={{ width: `${progress}` }}
           ></div>
         </div>
@@ -299,7 +301,7 @@ const UploadDocumentCard = ({
         <div role="status">
           <svg
             aria-hidden="true"
-            className="w-6 h-6 text-gray-200 animate-spin fill-blue-600"
+            className="w-6 h-6 text-gray-hover animate-spin fill-accent-primary"
             viewBox="0 0 100 101"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -317,10 +319,10 @@ const UploadDocumentCard = ({
         </div>
       ) : (
         <button
-          className="flex justify-center hover:bg-gray-200 rounded-lg p-2"
+          className="flex justify-center hover:bg-gray-hover rounded-lg p-2"
           onClick={() => handleRemove(name)}
         >
-          <XMarkIcon className="w-4 h-4 text-[#666f8d]" />
+          <XMarkIcon className="w-4 h-4 text-text-secondary" />
         </button>
       )}
 

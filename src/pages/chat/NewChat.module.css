@@ -1,0 +1,19 @@
+.background-gradient {
+  filter: blur(24px); /* blur-3xl */
+  position: absolute;
+  bottom: 2rem; /* bottom-8 */
+  left: 50%; /* left-1/2 */
+  transform: translateX(-50%); /* -translate-x-1/2 */
+  width: 75%; /* w-3/4 */
+  height: 75%; /* h-3/4 */
+  border-top-left-radius: 9999px; /* rounded-t-full */
+  border-top-right-radius: 9999px; /* rounded-t-full */
+  z-index: 1; /* z-[-2] */
+  background: radial-gradient(
+    circle at bottom,
+    rgba(50, 119, 251, 0.2) 55%,
+    rgba(130, 150, 254, 0.15) 40%,
+    rgba(135, 180, 255, 0.1) 80%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}

@@ -42,12 +42,12 @@ const ViewGlossary = () => {
   }, []);
 
   return (
-    <div className="flex flex-col h-full border border-[#e3e6ea] rounded-2xl">
+    <div className="flex flex-col h-full border rounded-2xl border-border-primary bg-background-primary">
       {/* Header - Fixed */}
-      <div className="flex items-center justify-between border-b p-4">
-        <h1 className="text-2xl font-bold">Glosseries</h1>
+      <div className="flex items-center justify-between border-b p-4 border-border-primary">
+        <h1 className="text-2xl font-bold text-text-primary">Glosseries</h1>
         <button
-          className="flex justify-center items-center gap-1 py-2 px-3 rounded-lg cursor-pointer bg-[#2777fb] text-white font-semibold text-sm"
+          className="flex justify-center items-center gap-1 py-2 px-3 rounded-lg cursor-pointer bg-accent-primary text-text-button-primary font-semibold text-sm"
           onClick={() => navigate('/glossary/upload')}
         >
           <PlusIcon className="w-4 h-4" />
@@ -66,15 +66,15 @@ const ViewGlossary = () => {
           {/* Search Bar - Fixed */}
           <div className="p-4 ">
             <div className="flex justify-between items-center w-full">
-              <p className="text-base font-semibold">
+              <p className="text-base font-semibold text-text-primary">
                 All glossaries{' (' + glossaries.length + ')'}
               </p>
-              <div className="flex items-center gap-2 px-3 py-3 shadow-lg rounded-lg bg-white">
-                <MagnifyingGlassIcon className="w-4 h-4" />
+              <div className="flex items-center gap-2 px-3 py-3 shadow-lg rounded-lg bg-input-background border border-border-primary">
+                <MagnifyingGlassIcon className="w-4 h-4 text-input-text" />
                 <input
                   placeholder="Search glossaries..."
                   type="text"
-                  className="text-sm focus:outline-none"
+                  className="text-sm focus:outline-none  bg-input-background text-input-text"
                 />
               </div>
             </div>
@@ -85,21 +85,21 @@ const ViewGlossary = () => {
             <div className="flex flex-col gap-2">
               {glossaries.length === 0 && (
                 <div className="flex items-center justify-center h-full">
-                  <p className="text-gray-500">No glossaries available</p>
+                  <p className="text-disabled-text">No glossaries available</p>
                 </div>
               )}
 
               {glossaries.length > 0 && (
                 <>
                   <div
-                    className={`grid grid-cols-[1fr_1150px] gap-4 bg-slate-100 rounded-xl items-center  p-3 w-full mb-2 }`}
+                    className={`flex justify-start items-center gap-4  w-full mb-2 }`}
                   >
-                    <div className="flex items-center gap-4 min-w-0">
-                      <p className="font-semibold truncate">Term</p>
+                    <div className="flex items-center gap-4  w-3/12 bg-background-secondary border border-border-primary rounded-xl px-5 py-3 text-text-primary">
+                      <p className="font-semibold ">Term</p>
                     </div>
 
-                    <div className="flex items-center gap-1 justify-start text-[#666f8d]">
-                      <p className="truncate">Description</p>
+                    <div className="flex items-center gap-1 justify-start  bg-background-secondary border border-border-primary rounded-xl px-5 py-3 w-full text-text-primary">
+                      <p className="font-semibold">Description</p>
                     </div>
                   </div>
 
@@ -131,14 +131,14 @@ interface GlossaryCardProps {
 const GlossaryCard = ({ term, description }: GlossaryCardProps) => {
   return (
     <div
-      className={`grid grid-cols-[1fr_1150px] gap-4 items-center bg-white shadow-md rounded-lg p-3 w-full text-sm cursor-pointer hover:shadow-xl hover:scale-[1.02] transition-all duration-300 
+      className={`flex justify-start  gap-4 items-center  text-sm cursor-pointer hover:shadow-xl hover:scale-[1.02] transition-all duration-300 
       }`}
     >
-      <div className="flex items-center gap-4 min-w-0">
+      <div className="flex items-center bg-background-primary border border-border-primary rounded-lg px-5 py-3 w-3/12 text-text-primary">
         <p className="font-semibold truncate">{term}</p>
       </div>
 
-      <div className="flex items-center gap-1 justify-start text-[#666f8d]">
+      <div className="flex items-center gap-1 justify-start g-background-primary border border-border-primary rounded-lg px-5 py-3 w-full text-text-secondary">
         <p className="truncate">{description}</p>
       </div>
     </div>
