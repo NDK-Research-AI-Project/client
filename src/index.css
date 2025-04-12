@@ -4,8 +4,83 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
 
-/* Remove the old @font-face declaration since we're using Google Fonts */
+/* 
+ * YourAI Design System Colors
+ * This section defines the color palette for the application 
+ * in both light and dark themes.
+ */
 
+/* Theme variables */
+/* Light theme specific variables */
+.light {
+  /* Background colors */
+  --background-primary: #ffffff;
+  --background-secondary: #f7f8fa;
+  --border-primary: #e5e7eb;
+
+  /* Text colors */
+  --text-primary: #1e1e1e;
+  --text-secondary: #666f8d;
+  --text-button-primary: #ffffff;
+
+  --gray-hover: rgb(236, 236, 236);
+  --background-secondary-hover: rgb(247, 248, 250);
+  /* Brand colors */
+  --accent-primary: #3b82f6;
+  --accent-secondary: #f7f8fa;
+  --accent-primary-hover: #5796fa;
+  --accent-secondary-hover: #e4e4e4;
+
+  /*Disabled Colors*/
+  --disabled: #e5e7eb;
+  --disabled-text: #a1a1aa;
+
+  /*Input Box Colors*/
+  --input-text: #4d5268;
+  --input-background: #ffffff;
+  --input-border: #e5e7eb;
+
+  /*Chat interface*/
+  --ai-answer-background: #ffffff;
+  --ai-prompt-send-background: #ffffff;
+}
+
+/* Dark theme specific variables */
+.dark {
+  /* Background colors */
+  --background-primary: #0f172a; /* deep slate */
+  --background-secondary: #1e293b; /* slightly lighter slate */
+  --border-primary: #334155; /* cool gray border */
+
+  /* Text colors */
+  --text-primary: #f8fafc; /* near-white for readability */
+  --text-secondary: #94a3b8; /* muted gray-blue */
+  --text-button-primary: #ffffff; /* white on buttons */
+
+  --gray-hover: #2e3b51; /* hover state for gray areas */
+  --background-secondary-hover: #1c2742;
+
+  /* Brand colors */
+  --accent-primary: #3b82f6; /* same as light theme for consistency */
+  --accent-secondary: #1e293b; /* match background-secondary */
+  --accent-primary-hover: #60a5fa; /* lighter blue hover */
+  --accent-secondary-hover: #334155; /* hover for secondary */
+
+  /* Disabled Colors */
+  --disabled: #475569; /* muted blue-gray */
+  --disabled-text: #64748b; /* softer muted text */
+
+  /* Input Box Colors */
+  --input-text: #e2e8f0; /* soft white text */
+  --input-background: #1e293b; /* dark background */
+  --input-border: #334155; /* subtle border */
+
+  /*Chat interface*/
+  --ai-answer-background: #ffffff11;
+  --ai-prompt-send-background: #ffffff11;
+}
+
+/* Basic styles */
 body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }

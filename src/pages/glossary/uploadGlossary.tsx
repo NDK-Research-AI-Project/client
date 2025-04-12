@@ -91,28 +91,28 @@ const UploadGlossary = () => {
   return (
     <>
       <div
-        className={`flex flex-col h-full  border border-[#e3e6ea] rounded-2xl py-4 px-5`}
+        className={`flex flex-col h-full  border border-border-primary rounded-2xl py-4 px-5 bg-background-primary`}
       >
-        <div className="flex items-center justify-start gap-3 border-b pb-3 mb-5">
+        <div className="flex items-center justify-start gap-3 border-b border-border-primary pb-3 mb-5 text-text-primary">
           <button
-            className="flex justify-center items-center gap-1 py-2 px-4 rounded-lg cursor-pointer bg-[#f7f8fa] text-[#1e1e1e] font-semibold text-sm border"
+            className="flex justify-center items-center gap-1 py-2 px-4 rounded-lg cursor-pointer bg-background-secondary font-semibold text-sm border border-border-primary"
             onClick={() => navigate('/glossary/view')}
           >
             <span>
-              <ArrowLeftIcon className="w-4 h-4 " />
+              <ArrowLeftIcon className="w-4 h-4 text-text-primary" />
             </span>
           </button>
-          <h1 className="text-2xl font-bold">Add New Glossaries</h1>
+          <h1 className="text-2xl font-bold ">Add New Glossaries</h1>
         </div>
 
         {/* content area */}
 
         <div className="flex-1 overflow-y-auto transition-all duration-300">
           {!isUploading && (
-            <div className="rounded-xl border border-stroke bg-white shadow-default ">
-              <div className="border-b border-stroke py-6 px-7  flex justify-start items-center gap-3">
+            <div className="rounded-xl border border-stroke bg-background-primary shadow-default border-border-primary ">
+              <div className="border-b border-stroke py-6 px-7 text-text-primary flex justify-start items-center gap-3 border-border-primary">
                 <RectangleGroupIcon className="w-6 h-6" />
-                <h3 className="text-base font-semibold text-[#1e1e1e] ">
+                <h3 className="text-base font-semibold ">
                   Insert your glossaries
                 </h3>
               </div>
@@ -122,7 +122,7 @@ const UploadGlossary = () => {
                     id="glossaryUpload"
                     className="flex flex-col gap-4 w-full"
                   >
-                    <p className="text-base text-[#666f8d] mb-2">
+                    <p className="text-base text-text-secondary mb-2">
                       Add your glossary items here. Each item should have a term
                       and its definition.
                     </p>
@@ -139,11 +139,11 @@ const UploadGlossary = () => {
                       />
                     ))}
                     <div className="w-full flex justify-between items-center gap-5">
-                      <hr className="w-full" />
+                      <hr className="w-full border-border-primary" />
                       <button
                         aria-label="Add new Feild"
                         type="button"
-                        className="flex justify-center items-center min-w-8 h-8 rounded-full bg-[#f7f8fa] hover:bg-slate-200 text-[#1e1e1e] font-semibold text-sm border disabled:bg-slate-100"
+                        className="flex justify-center items-center min-w-8 h-8 rounded-full bg-accent-secondary hover:bg-accent-secondary-hover text-text-primary font-semibold text-sm border border-border-primary disabled:bg-disabled disabled:text-disabled-text"
                         onClick={() => createNewGlossaryInput()}
                         disabled={
                           glossary[glossary.length - 1].term === '' ||
@@ -154,7 +154,7 @@ const UploadGlossary = () => {
                           <PlusIcon className="w-4 h-4" />
                         </span>
                       </button>
-                      <hr className="w-full" />
+                      <hr className="w-full border-border-primary" />
                     </div>
                   </div>
                 </form>
@@ -170,14 +170,18 @@ const UploadGlossary = () => {
             <>
               <button
                 type="button"
-                className="flex justify-center rounded-lg cursor-pointer py-2 px-3 font-semibold text-sm text-[#1e1e1e] hover:shadow-1 border"
+                className="flex justify-center rounded-lg cursor-pointer py-2 px-3 font-semibold text-sm text-text-primary hover:shadow-1 border border-border-primary disabled:bg-disabled disabled:text-disabled-text"
                 onClick={handleClearAll}
+                disabled={
+                  glossary[glossary.length - 1].term === '' ||
+                  glossary[glossary.length - 1].definition === ''
+                }
               >
                 Clear all
               </button>
               <button
                 type="button"
-                className="flex justify-center items-center gap-1 py-2 px-4  rounded-lg cursor-pointer bg-[#2777fb] text-white font-semibold text-sm disabled:bg-slate-200"
+                className="flex justify-center items-center gap-1 py-2 px-4  rounded-lg cursor-pointer bg-accent-primary text-text-button-primary font-semibold text-sm disabled:bg-disabled disabled:text-disabled-text"
                 onClick={uploadGlossary}
                 disabled={
                   glossary[glossary.length - 1].term === '' ||
@@ -225,22 +229,22 @@ const GlossaryInputFeild = ({
           placeholder="Enter Term here..."
           value={term}
           onChange={(e) => handleChange(e, id)}
-          className="border  rounded-lg py-3 px-4 w-3/12 text-[#4d5268] text-sm font-medium"
+          className="border  rounded-lg py-3 px-4 w-3/12 text-input-text text-sm font-medium border-input-border bg-input-background"
         />
-        <span className="text-[#a1a1a1]">:</span>
+        <span className="text-text-secondary">:</span>
         <input
           type="text"
           name="definition"
           placeholder="Definition"
           value={definition}
           onChange={(e) => handleChange(e, id)}
-          className="border  rounded-lg py-3 px-4 p-2 w-full  text-sm text-[#4d5268]"
+          className="border  rounded-lg py-3 px-4 p-2 w-full  text-sm text-input-text border-input-border  bg-input-background"
         />
       </div>
 
       <button
         type="button"
-        className="flex justify-center items-center w-8 h-8 rounded-full bg-[#f7f8fa] hover:bg-red-500 transition-all hover:text-white text-[#1e1e1e] font-semibold text-sm border disabled:bg-slate-200 disabled:text-[#1e1e1e]"
+        className="flex justify-center items-center w-8 h-8 rounded-full bg-accent-secondary hover:bg-red-500 transition-all hover:text-white text-text-primary font-semibold text-sm border border-border-primary disabled:bg-disabled disabled:text-disabled-text"
         onClick={() => handleRemove(id)}
         disabled={length <= 1}
       >

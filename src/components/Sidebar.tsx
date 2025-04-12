@@ -51,11 +51,11 @@ const Sidebar: React.FC<SidebarProps> = ({
         ${isCollapsed ? 'w-28' : 'w-72'}
       `}
     >
-      <div className="bg-[#f7f8fa] text-[#1e1e1e] p-4 flex flex-col justify-between rounded-2xl h-full border">
+      <div className="bg-background-secondary text-text-primary p-4 flex flex-col justify-between rounded-2xl h-full border border-border-primary ">
         {isCollapsed && (
           <button
             onClick={() => setIsCollapsed(!isCollapsed)}
-            className="hover:bg-gray-200 p-2 rounded-lg flex justify-center items-center mb-5 mt-4"
+            className="hover:bg-gray-hover p-2 rounded-lg flex justify-center items-center mb-5 mt-4"
             aria-label={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
           >
             <Bars3Icon className="w-5 h-5" />
@@ -77,13 +77,13 @@ const Sidebar: React.FC<SidebarProps> = ({
             <div className="flex items-center justify-between ">
               <button
                 onClick={() => navigate('/settings')}
-                className="hover:bg-gray-200 p-2 rounded-lg"
+                className="hover:bg-gray-hover p-2 rounded-lg"
               >
                 <Cog6ToothIcon className="w-5 h-5" />
               </button>
               <button
                 onClick={() => setIsCollapsed(!isCollapsed)}
-                className="hover:bg-gray-200 p-2 rounded-lg"
+                className="hover:bg-gray-hover p-2 rounded-lg"
                 aria-label={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
               >
                 <Bars3Icon className="w-5 h-5" />
@@ -103,8 +103,8 @@ const Sidebar: React.FC<SidebarProps> = ({
                   className={`flex items-center justify-start gap-2  py-3 px-4 mb-2 rounded-lg cursor-pointer transition-colors 
             ${
               location.pathname.includes(item.path)
-                ? 'bg-white text-[#1e1e1e] shadow-md font-semibold'
-                : 'hover:bg-gray-200'
+                ? 'bg-background-primary text-text-primary shadow-md font-semibold '
+                : 'hover:bg-gray-hover'
             }`}
                   onClick={() => navigate(item.path)}
                 >
@@ -125,7 +125,7 @@ const Sidebar: React.FC<SidebarProps> = ({
           {/* botton section */}
           <div className="w-full">
             {!isCollapsed && (
-              <button className="flex justify-center items-center gap-3 py-2 px-4 mb-2 rounded-lg cursor-pointer bg-[#2777fb] w-full text-white font-semibold ">
+              <button className="flex justify-center items-center gap-3 py-2 px-4 mb-2 rounded-lg cursor-pointer bg-accent-primary w-full text-text-button-primary font-semibold ">
                 <span>
                   <PlusIcon className="w-5 h-5" />
                 </span>
@@ -136,11 +136,10 @@ const Sidebar: React.FC<SidebarProps> = ({
               <div className="flex flex-col items-center justify-between gap-5">
                 <button
                   onClick={() => navigate('/settings')}
-                  className="hover:bg-gray-200 p-2 rounded-lg"
+                  className="hover:bg-gray-hover p-2 rounded-lg"
                 >
                   <Cog6ToothIcon className="w-5 h-5" />
                 </button>
-
                 <img
                   className="w-9 h-9 rounded-full mb-4"
                   src="https://avatar.iran.liara.run/public"
