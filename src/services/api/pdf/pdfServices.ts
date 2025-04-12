@@ -55,7 +55,8 @@ export const uploadPdfDocument = async (
     return { data };
   } catch (error: any) {
     console.error('Error in uploadPdfDocument:', error);
-    const errorMessage = error.response.data.error || 'Unknown error occurred';
+    const errorMessage =
+      error?.response?.data?.error || 'Unknown error occurred';
     return { error: errorMessage };
   }
 };
@@ -75,7 +76,7 @@ export const getAllPdfDocuments = async (): Promise<IGetAllPdfResponse> => {
   } catch (error: any) {
     console.error('Error in getAllPdfDocuments:', error);
     const errorMessage =
-      error.response.data.error || 'Failed to retrieve PDF documents';
+      error?.response?.data?.error || 'Failed to retrieve PDF documents';
     return { error: errorMessage };
   }
 };

@@ -21,6 +21,7 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     // Check local storage first
     const savedTheme = localStorage.getItem('theme');
+    const savedAccentColor = localStorage.getItem('accentColor');
 
     // Check system preference if no saved preference
     const prefersDark = window.matchMedia(
@@ -28,6 +29,13 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
     ).matches;
 
     const targetDiv = document.getElementById('themeProvider');
+
+    if (savedAccentColor) {
+      setAccentColor(savedAccentColor as AccentColor);
+      targetDiv?.classList.add(savedAccentColor as AccentColor);
+    } else {
+      targetDiv?.classList.add(AccentColor.BLUE); // Default accent color
+    }
 
     if (savedTheme === null) {
       if (prefersDark) {
