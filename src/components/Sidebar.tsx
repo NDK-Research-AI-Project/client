@@ -6,6 +6,7 @@ import {
   Cog6ToothIcon,
   Bars3Icon,
   PlusIcon,
+  RectangleGroupIcon,
 } from '@heroicons/react/24/outline';
 interface NavItem {
   path: string;
@@ -28,6 +29,11 @@ const navigationItems: NavItem[] = [
     path: '/document',
     label: 'Documents',
     icon: <DocumentIcon className="w-5 h-5" />,
+  },
+  {
+    path: '/glossary',
+    label: 'Glossary',
+    icon: <RectangleGroupIcon className="w-5 h-5" />,
   },
 ];
 
