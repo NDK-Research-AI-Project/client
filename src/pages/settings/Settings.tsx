@@ -1,9 +1,9 @@
 import { PaintBrushIcon } from '@heroicons/react/24/outline';
 import { useTheme } from '../../contexts/theme';
-import { ThemeColor } from '../../configs/app';
+import { AccentColor, ThemeColor } from '../../configs/app';
 
 const Settings = () => {
-  const { themeColor, handleTheme } = useTheme();
+  const { themeColor, handleTheme, accentColor, handleAccent } = useTheme();
   return (
     <>
       <div
@@ -81,31 +81,61 @@ const Settings = () => {
                     </p>
                   </div>
                   <div className="w-full flex flex-row justify-start items-center gap-4 ">
-                    <button className="flex flex-col justify-center items-center hover:bg-background-secondary-hover p-3 rounded-xl transition-all">
+                    <button
+                      className={`flex flex-col justify-center items-center hover:bg-background-secondary-hover p-3 rounded-xl transition-all ${
+                        accentColor === AccentColor.BLUE &&
+                        'bg-background-secondary-hover'
+                      }`}
+                      onClick={() => handleAccent(AccentColor.BLUE)}
+                    >
                       <span className="w-16  h-12 bg-[#3b82f6] mb-2 rounded-lg"></span>
                       <span className="text-sm text-text-secondary ">Blue</span>
                     </button>
 
-                    <button className="flex flex-col justify-center items-center hover:bg-background-secondary-hover p-3 rounded-xl transition-all">
+                    <button
+                      className={`flex flex-col justify-center items-center hover:bg-background-secondary-hover p-3 rounded-xl transition-all ${
+                        accentColor === AccentColor.GREEN &&
+                        'bg-background-secondary-hover'
+                      }`}
+                      onClick={() => handleAccent(AccentColor.GREEN)}
+                    >
                       <span className="w-16  h-12 bg-[#10b981] mb-2 rounded-lg"></span>
                       <span className="text-sm text-text-secondary ">
                         Green
                       </span>
                     </button>
 
-                    <button className="flex flex-col justify-center items-center hover:bg-background-secondary-hover p-3 rounded-xl transition-all">
+                    <button
+                      className={`flex flex-col justify-center items-center hover:bg-background-secondary-hover p-3 rounded-xl transition-all ${
+                        accentColor === AccentColor.YELLOW &&
+                        'bg-background-secondary-hover'
+                      }`}
+                      onClick={() => handleAccent(AccentColor.YELLOW)}
+                    >
                       <span className="w-16  h-12 bg-[#f59e0b] mb-2 rounded-lg"></span>
                       <span className="text-sm text-text-secondary ">
                         Yellow
                       </span>
                     </button>
 
-                    <button className="flex flex-col justify-center items-center hover:bg-background-secondary-hover p-3 rounded-xl transition-all">
+                    <button
+                      className={`flex flex-col justify-center items-center hover:bg-background-secondary-hover p-3 rounded-xl transition-all ${
+                        accentColor === AccentColor.RED &&
+                        'bg-background-secondary-hover'
+                      }`}
+                      onClick={() => handleAccent(AccentColor.RED)}
+                    >
                       <span className="w-16  h-12 bg-[#ef4444] mb-2 rounded-lg"></span>
                       <span className="text-sm text-text-secondary ">Red</span>
                     </button>
 
-                    <button className="flex flex-col justify-center items-center hover:bg-background-secondary-hover p-3 rounded-xl transition-all">
+                    <button
+                      className={`flex flex-col justify-center items-center hover:bg-background-secondary-hover p-3 rounded-xl transition-all ${
+                        accentColor === AccentColor.PURPLE &&
+                        'bg-background-secondary-hover'
+                      }`}
+                      onClick={() => handleAccent(AccentColor.PURPLE)}
+                    >
                       <span className="w-16  h-12 bg-[#8b5cf6] mb-2 rounded-lg"></span>
                       <span className="text-sm text-text-secondary ">
                         Purple

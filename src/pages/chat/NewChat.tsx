@@ -10,6 +10,8 @@ import { PaperAirplaneIcon } from '@heroicons/react/24/solid';
 import React, { useEffect, useRef, useState } from 'react';
 import { sendChatMessage } from '../../services/api/chat/chatServices';
 import { showError } from '../../utils/toaster';
+import { GradientColors } from '../../configs/app';
+import { useTheme } from '../../contexts/theme';
 
 enum senderType {
   ai = 'ai',
@@ -32,6 +34,7 @@ const NewChat: React.FC<ChatProps> = ({ className }) => {
   const [inputMessage, setInputMessage] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const { accentColor } = useTheme();
 
   const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -72,34 +75,6 @@ const NewChat: React.FC<ChatProps> = ({ className }) => {
       setLoading(false);
       setMessages((prev) => [...prev, aiMessage]);
     }
-
-    // const sendUserPrompt = sendChatMessage({ question: userMessage.text }).then(
-    //   ({ data, error }) => {
-    //     if (error) {
-    //       // TODO show err notification to user
-    //       console.error('Error sending message:', error);
-    //       showError(error);
-    //       setLoading(false);
-    //       return;
-    //     }
-    //     if (data) {
-    //       const aiMessage: Message = {
-    //         id: (Date.now() + 1).toString(),
-    //         text: data.answer,
-    //         sender: senderType.ai,
-    //         timestamp: new Date(),
-    //       };
-    //       setLoading(false);
-    //       setMessages((prev) => [...prev, aiMessage]);
-    //     }
-    //   }
-    // );
-
-    // showPromise(sendUserPrompt, {
-    //   loading: 'Sending...',
-    //   success: 'Success!',
-    //   error: (error: string) => `${error}`,
-    // });
   };
 
   useEffect(() => {
@@ -111,7 +86,7 @@ const NewChat: React.FC<ChatProps> = ({ className }) => {
       className={`flex flex-col h-full ${className} border border-border-primary rounded-2xl py-4 px-5 relative`}
     >
       <div
-        className=" 
+        className={`
                       blur-3xl
                       absolute 
                       bottom-8
@@ -121,8 +96,8 @@ const NewChat: React.FC<ChatProps> = ({ className }) => {
                       h-3/4
                       rounded-t-full
                       z-[1]
-                      bg-[radial-gradient(circle_at_bottom,rgba(50,119,251,0.2)_55%,rgba(130,150,254,0.15)_40%,rgba(135,180,255,0.1)_80%,rgba(255,255,255,0)_100%)]
-                    "
+                      ${GradientColors[accentColor]}
+                    `}
       ></div>
       <div className="flex items-center justify-between mb-4 border-b border-border-primary pb-3   z-[2]">
         <h1 className="text-2xl font-bold text-text-primary">New chat</h1>

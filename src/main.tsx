@@ -7,7 +7,7 @@ import { ThemeProvider } from './contexts/theme.tsx';
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ThemeProvider>
-      <div id="themeProvider" className=" transition-all  light purple  ">
+      <div id="themeProvider">
         <App />
       </div>
     </ThemeProvider>
