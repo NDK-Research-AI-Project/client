@@ -148,4 +148,4 @@ For development and testing, the application includes mock data for chats and do
 
 ## License
 
-No any Licenses yet.
+Apache 2.0
