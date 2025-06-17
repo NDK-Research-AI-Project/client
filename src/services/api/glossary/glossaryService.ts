@@ -30,6 +30,7 @@ export const uploadGlossaries = async (
 };
 
 interface IGetGlossary {
+  _id?: string; // Add ID field for backend operations
   term: string;
   definition: string;
 }
