@@ -23,7 +23,8 @@ export const router = createBrowserRouter([
         children: [
           { index: true, element: <Navigate to="/chat" replace /> },
           { path: 'chat', element: <Chat /> },
-          { path: 'chat/new', element: <NewChat /> }, // TODO : need to pass chat id as url param
+          { path: 'chat/new', element: <NewChat /> },
+          { path: 'chat/:sessionId', element: <NewChat /> }, // Dynamic route for existing chat sessions
           {
             path: 'document',
             element: <Navigate to="/document/view" replace />,

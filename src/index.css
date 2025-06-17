@@ -314,3 +314,107 @@
 body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
+
+/* Custom prose styles that work with our theme system */
+.prose {
+  /* Light theme prose styles */
+  --tw-prose-body: var(--text-secondary);
+  --tw-prose-headings: var(--text-primary);
+  --tw-prose-lead: var(--text-secondary);
+  --tw-prose-links: var(--accent-primary);
+  --tw-prose-bold: var(--text-primary);
+  --tw-prose-counters: var(--text-secondary);
+  --tw-prose-bullets: var(--border-primary);
+  --tw-prose-hr: var(--border-primary);
+  --tw-prose-quotes: var(--text-primary);
+  --tw-prose-quote-borders: var(--border-primary);
+  --tw-prose-captions: var(--text-secondary);
+  --tw-prose-kbd: var(--text-primary);
+  --tw-prose-kbd-shadows: 17 24 39;
+  --tw-prose-code: var(--accent-primary);
+  --tw-prose-pre-code: var(--text-primary);
+  --tw-prose-pre-bg: var(--background-secondary);
+  --tw-prose-th-borders: var(--border-primary);
+  --tw-prose-td-borders: var(--border-primary);
+  
+  /* Dark theme prose styles (prose-invert) */
+  --tw-prose-invert-body: var(--text-secondary);
+  --tw-prose-invert-headings: var(--text-primary);
+  --tw-prose-invert-lead: var(--text-secondary);
+  --tw-prose-invert-links: var(--accent-primary);
+  --tw-prose-invert-bold: var(--text-primary);
+  --tw-prose-invert-counters: var(--text-secondary);
+  --tw-prose-invert-bullets: var(--border-primary);
+  --tw-prose-invert-hr: var(--border-primary);
+  --tw-prose-invert-quotes: var(--text-primary);
+  --tw-prose-invert-quote-borders: var(--border-primary);
+  --tw-prose-invert-captions: var(--text-secondary);
+  --tw-prose-invert-kbd: var(--text-primary);
+  --tw-prose-invert-kbd-shadows: 255 255 255;
+  --tw-prose-invert-code: var(--accent-primary);
+  --tw-prose-invert-pre-code: var(--text-primary);
+  --tw-prose-invert-pre-bg: var(--background-secondary);
+  --tw-prose-invert-th-borders: var(--border-primary);
+  --tw-prose-invert-td-borders: var(--border-primary);
+  
+  font-size: 1rem;
+  line-height: 1.75;
+  max-width: none;
+}
+
+/* Enhanced code block styling */
+.prose pre {
+  background-color: var(--background-secondary) !important;
+  border: 1px solid var(--border-primary);
+  border-radius: 0.5rem;
+}
+
+.prose code {
+  background-color: var(--background-secondary);
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+  font-weight: 500;
+}
+
+.prose pre code {
+  background-color: transparent;
+  padding: 0;
+}
+
+/* Table styling */
+.prose table {
+  border-collapse: collapse;
+  border: 1px solid var(--border-primary);
+}
+
+.prose th,
+.prose td {
+  border: 1px solid var(--border-primary);
+  padding: 0.5rem 0.75rem;
+}
+
+.prose th {
+  background-color: var(--background-secondary);
+  font-weight: 600;
+}
+
+/* Blockquote styling */
+.prose blockquote {
+  border-left: 4px solid var(--accent-primary);
+  background-color: var(--background-secondary);
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 0.25rem;
+}
+
+/* Link styling */
+.prose a {
+  color: var(--accent-primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.prose a:hover {
+  color: var(--accent-primary-hover);
+  text-decoration: underline;
+}
