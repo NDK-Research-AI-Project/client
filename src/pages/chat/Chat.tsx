@@ -243,7 +243,7 @@ const Chat: React.FC<ChatProps> = ({ className }) => {
                   <ChatCard
                     key={chat.session_id || index}
                     sessionId={chat.session_id}
-                    topic={chat.topic || `Chat ${chat.session_id?.slice(-8)}`}
+                    topic={chat.suggested_topic || `Chat ${chat.session_id?.slice(-8)}`}
                     msgCount={chat.message_count}
                     time={chat.last_message_time || chat.time}
                     onClick={handleChatCardClick}
