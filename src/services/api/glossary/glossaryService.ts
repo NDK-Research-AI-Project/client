@@ -55,3 +55,57 @@ export const getAllGlossaries = async (): Promise<IGetAllGlossaryResponse> => {
     return { error: errorMessage };
   }
 };
+
+interface IUpdateGlossary {
+  term?: string;
+  definition?: string;
+}
+
+interface IUpdateGlossaryResponse {
+  data?: { message: string };
+  error?: string;
+}
+
+export const updateGlossary = async (
+  itemId: string,
+  updateData: IUpdateGlossary
+): Promise<IUpdateGlossaryResponse> => {
+  try {
+    const { data } = await api.patch(`/glossary/update/${itemId}`, updateData);
+
+    if (!data) {
+      throw new Error('Failed to update glossary');
+    }
+
+    return { data };
+  } catch (error: any) {
+    console.error('Error in updateGlossary:', error);
+    const errorMessage =
+      error?.response?.data?.error || 'Failed to update glossary item';
+    return { error: errorMessage };
+  }
+};
+
+interface IDeleteGlossaryResponse {
+  data?: { message: string };
+  error?: string;
+}
+
+export const deleteGlossary = async (
+  itemId: string
+): Promise<IDeleteGlossaryResponse> => {
+  try {
+    const { data } = await api.delete(`/glossary/delete/${itemId}`);
+
+    if (!data) {
+      throw new Error('Failed to delete glossary');
+    }
+
+    return { data };
+  } catch (error: any) {
+    console.error('Error in deleteGlossary:', error);
+    const errorMessage =
+      error?.response?.data?.error || 'Failed to delete glossary item';
+    return { error: errorMessage };
+  }
+};
