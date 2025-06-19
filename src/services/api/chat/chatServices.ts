@@ -5,7 +5,7 @@ interface IChatResponse {
   session_id: string;
   user_message?: IMessage;
   assistant_message?: IMessage;
-  explernation?: string[]
+  explanation?: string[];
 }
 
 interface IResponseType {
@@ -55,14 +55,9 @@ interface IDeleteSessionResponse {
   deleted_count: number;
 }
 
-export const sendChatMessage = async (
-  payload: IUserPromtMessage
-): Promise<IResponseType> => {
+export const sendChatMessage = async (payload: IUserPromtMessage): Promise<IResponseType> => {
   try {
-    const { data } = await api.post<IChatResponse>(
-      '/knowledge-graph/query',
-      payload
-    );
+    const { data } = await api.post<IChatResponse>('/knowledge-graph/query', payload);
 
     if (!data) {
       throw new Error(`Failed to get response from AI`);
@@ -71,22 +66,15 @@ export const sendChatMessage = async (
     return { data };
   } catch (error) {
     console.error('Error in sendChatMessage:', error);
-    const errorMessage =
-      error instanceof Error ? error.message : 'Unknown error occurred';
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
     return { error: errorMessage };
   }
 };
 
 // Enhanced chat service with session support
-export const sendChatMessageToSession = async (
-  sessionId: string,
-  payload: { question: string }
-): Promise<IResponseType> => {
+export const sendChatMessageToSession = async (sessionId: string, payload: { question: string }): Promise<IResponseType> => {
   try {
-    const { data } = await api.post<IChatResponse>(
-      `/chat/${sessionId}/query`,
-      payload
-    );
+    const { data } = await api.post<IChatResponse>(`/chat/${sessionId}/query`, payload);
 
     if (!data) {
       throw new Error(`Failed to get response from AI`);
@@ -95,8 +83,7 @@ export const sendChatMessageToSession = async (
     return { data };
   } catch (error) {
     console.error('Error in sendChatMessageToSession:', error);
-    const errorMessage =
-      error instanceof Error ? error.message : 'Unknown error occurred';
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
     return { error: errorMessage };
   }
 };
@@ -116,8 +103,7 @@ export const createChatSession = async (): Promise<{
     return { data };
   } catch (error) {
     console.error('Error in createChatSession:', error);
-    const errorMessage =
-      error instanceof Error ? error.message : 'Unknown error occurred';
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
     return { error: errorMessage };
   }
 };
@@ -136,8 +122,7 @@ export const getChatSessions = async (): Promise<{
     return { data };
   } catch (error) {
     console.error('Error in getChatSessions:', error);
-    const errorMessage =
-      error instanceof Error ? error.message : 'Unknown error occurred';
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
     return { error: errorMessage };
   }
 };
@@ -152,7 +137,7 @@ export const getChatHistory = async (
 }> => {
   try {
     const { data } = await api.get<IMessage[]>(`/chat/${sessionId}`, {
-      params: { limit, skip }
+      params: { limit, skip },
     });
 
     if (!data) {
@@ -162,8 +147,7 @@ export const getChatHistory = async (
     return { data };
   } catch (error) {
     console.error('Error in getChatHistory:', error);
-    const errorMessage =
-      error instanceof Error ? error.message : 'Unknown error occurred';
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
     return { error: errorMessage };
   }
 };
@@ -185,8 +169,7 @@ export const addMessageToSession = async (
     return { data };
   } catch (error) {
     console.error('Error in addMessageToSession:', error);
-    const errorMessage =
-      error instanceof Error ? error.message : 'Unknown error occurred';
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
     return { error: errorMessage };
   }
 };
@@ -207,9 +190,7 @@ export const deleteChatSession = async (
     return { data };
   } catch (error) {
     console.error('Error in deleteChatSession:', error);
-    const errorMessage =
-      error instanceof Error ? error.message : 'Unknown error occurred';
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
     return { error: errorMessage };
   }
 };
-

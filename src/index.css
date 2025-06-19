@@ -4,6 +4,51 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
 
+/* Hide scrollbar arrows in WebKit browsers */
+::-webkit-scrollbar-button {
+  display: none;
+}
+
+/* Hide scrollbar arrows in Firefox */
+scrollbar-button {
+  display: none;
+}
+/* Modern Scroller Styles */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background-secondary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-primary);
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--background-secondary);
+}
+
+/* Firefox scrollbar styling */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-primary) var(--background-secondary);
+}
+
+/* Smooth scrolling behavior */
+html {
+  scroll-behavior: smooth;
+}
+
 /* 
  * YourAI Design System Colors
  * This section defines the color palette for the application 
@@ -336,7 +381,7 @@ body {
   --tw-prose-pre-bg: var(--background-secondary);
   --tw-prose-th-borders: var(--border-primary);
   --tw-prose-td-borders: var(--border-primary);
-  
+
   /* Dark theme prose styles (prose-invert) */
   --tw-prose-invert-body: var(--text-secondary);
   --tw-prose-invert-headings: var(--text-primary);
@@ -356,7 +401,7 @@ body {
   --tw-prose-invert-pre-bg: var(--background-secondary);
   --tw-prose-invert-th-borders: var(--border-primary);
   --tw-prose-invert-td-borders: var(--border-primary);
-  
+
   font-size: 1rem;
   line-height: 1.75;
   max-width: none;
