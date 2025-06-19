@@ -11,6 +11,8 @@ import remarkGfm from 'remark-gfm';
 import rehypeHighlight from 'rehype-highlight';
 import { useParams, useNavigate } from 'react-router-dom';
 import { sendChatMessageToSession, getChatHistory, createChatSession, deleteChatSession } from '../../services/api/chat/chatServices';
+import aiImage from '../../assets/ai-logo.png';
+import manImage from '../../assets/man.png';
 
 enum senderType {
   ai = 'ai',
@@ -244,7 +246,7 @@ const NewChat: React.FC<ChatProps> = ({ className }) => {
             <div className="relative z-10 text-center">
               {/* AI Avatar */}
               <div className="mb-6">
-                <img className="w-16 h-16 rounded-full mx-auto shadow-xl border-2 border-accent-primary/20" src="https://avatar.iran.liara.run/public/job/operator/male" alt="AI Assistant" />
+                <img className="w-16 h-16 rounded-full mx-auto shadow-xl border-2 border-accent-primary/20" src={aiImage} alt="AI Assistant" />
               </div>
 
               {/* Welcome message */}
@@ -290,7 +292,7 @@ export const MessageBlock: React.FC<{ message: Message }> = ({ message }) => {
     <div className={`mb-8`}>
       {message.sender === 'user' && (
         <div className="flex items-start gap-2 text-sm p-2 w-3/4 mx-auto px-11">
-          <img className="w-7 h-7 rounded-full mb-4" src="https://avatar.iran.liara.run/public/boy" alt="Rounded avatar" />
+          <img className="w-7 h-7 rounded-full mb-4" src={manImage} alt="Rounded avatar" />
           <div className="flex flex-col">
             <div className="flex items-center gap-2">
               <p className="font-semibold text-text-primary">Sam Walton</p>
@@ -306,7 +308,7 @@ export const MessageBlock: React.FC<{ message: Message }> = ({ message }) => {
       {message.sender === 'ai' && (
         <div className="flex flex-col justify-start items-start gap-2 text-sm bg-ai-answer-background border border-border-primary py-8 px-10 rounded-xl  w-3/4 mx-auto ">
           <div className="flex items-start justify-start gap-2 text-sm overflow-x-hidden">
-            <img className="w-7 h-7 rounded-full mb-4" src="https://avatar.iran.liara.run/public/job/operator/male" alt="Rounded avatar" />
+            <img className="w-7 h-7 rounded-full mb-4" src={aiImage} alt="Rounded avatar" />
             <div className="flex flex-col overflow-x-hidden">
               <div className="flex items-center gap-2">
                 <p className="font-semibold text-text-primary">Your AI</p>

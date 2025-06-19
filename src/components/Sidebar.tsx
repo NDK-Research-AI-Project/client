@@ -1,13 +1,8 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import {
-  ChatBubbleOvalLeftEllipsisIcon,
-  DocumentIcon,
-  Cog6ToothIcon,
-  Bars3Icon,
-  PlusIcon,
-  RectangleGroupIcon,
-} from '@heroicons/react/24/outline';
+import { ChatBubbleOvalLeftEllipsisIcon, DocumentIcon, Cog6ToothIcon, Bars3Icon, PlusIcon, RectangleGroupIcon } from '@heroicons/react/24/outline';
+import manImage from '../assets/man.png';
+
 interface NavItem {
   path: string;
   label: string;
@@ -37,10 +32,7 @@ const navigationItems: NavItem[] = [
   },
 ];
 
-const Sidebar: React.FC<SidebarProps> = ({
-  isCollapsed,
-  setIsCollapsed,
-}): JSX.Element => {
+const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }): JSX.Element => {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -53,39 +45,24 @@ const Sidebar: React.FC<SidebarProps> = ({
     >
       <div className="bg-background-secondary text-text-primary p-4 flex flex-col justify-between rounded-2xl h-full border border-border-primary ">
         {isCollapsed && (
-          <button
-            onClick={() => setIsCollapsed(!isCollapsed)}
-            className="hover:bg-gray-hover p-2 rounded-lg flex justify-center items-center mb-5 mt-4"
-            aria-label={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-          >
+          <button onClick={() => setIsCollapsed(!isCollapsed)} className="hover:bg-gray-hover p-2 rounded-lg flex justify-center items-center mb-5 mt-4" aria-label={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}>
             <Bars3Icon className="w-5 h-5" />
           </button>
         )}
         {!isCollapsed && (
-          <div className="flex items-center justify-between  py-4 mb-5">
+          <div className="flex items-center justify-between  py-4 mb-5 ml-2">
             <div className="flex items-center gap-2">
-              <img
-                className="w-9 h-9 rounded-full"
-                src="https://avatar.iran.liara.run/public"
-                alt="Rounded avatar"
-              />
+              <img className="w-7 h-7 rounded-full" src={manImage} alt="Rounded avatar" />
 
               <div>
                 <p className="text-md font-semibold">Sam Walton</p>
               </div>
             </div>
             <div className="flex items-center justify-between ">
-              <button
-                onClick={() => navigate('/settings')}
-                className="hover:bg-gray-hover p-2 rounded-lg"
-              >
+              <button onClick={() => navigate('/settings')} className="hover:bg-gray-hover p-2 rounded-lg">
                 <Cog6ToothIcon className="w-5 h-5" />
               </button>
-              <button
-                onClick={() => setIsCollapsed(!isCollapsed)}
-                className="hover:bg-gray-hover p-2 rounded-lg"
-                aria-label={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-              >
+              <button onClick={() => setIsCollapsed(!isCollapsed)} className="hover:bg-gray-hover p-2 rounded-lg" aria-label={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}>
                 <Bars3Icon className="w-5 h-5" />
               </button>
             </div>
@@ -101,20 +78,12 @@ const Sidebar: React.FC<SidebarProps> = ({
                 <div
                   key={item.path}
                   className={`flex items-center justify-start gap-2  py-3 px-4 mb-2 rounded-lg cursor-pointer transition-colors 
-            ${
-              location.pathname.includes(item.path)
-                ? 'bg-background-primary text-text-primary shadow-md font-semibold '
-                : 'hover:bg-gray-hover'
-            }`}
+            ${location.pathname.includes(item.path) ? 'bg-background-primary text-text-primary shadow-md font-semibold ' : 'hover:bg-gray-hover'}`}
                   onClick={() => navigate(item.path)}
                 >
                   {item.icon}
 
-                  {!isCollapsed && (
-                    <p className="transition-opacity duration-300">
-                      {item.label}
-                    </p>
-                  )}
+                  {!isCollapsed && <p className="transition-opacity duration-300">{item.label}</p>}
                 </div>
               ))}
             </div>
@@ -134,17 +103,10 @@ const Sidebar: React.FC<SidebarProps> = ({
             )}
             {isCollapsed && (
               <div className="flex flex-col items-center justify-between gap-5">
-                <button
-                  onClick={() => navigate('/settings')}
-                  className="hover:bg-gray-hover p-2 rounded-lg"
-                >
+                <button onClick={() => navigate('/settings')} className="hover:bg-gray-hover p-2 rounded-lg">
                   <Cog6ToothIcon className="w-5 h-5" />
                 </button>
-                <img
-                  className="w-9 h-9 rounded-full mb-4"
-                  src="https://avatar.iran.liara.run/public"
-                  alt="Rounded avatar"
-                />
+                <img className="w-9 h-9 rounded-full mb-4" src={manImage} alt="Rounded avatar" />
               </div>
             )}
           </div>
