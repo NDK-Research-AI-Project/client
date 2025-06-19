@@ -5,6 +5,7 @@ interface IChatResponse {
   session_id: string;
   user_message?: IMessage;
   assistant_message?: IMessage;
+  explernation?: string[]
 }
 
 interface IResponseType {
@@ -24,12 +25,15 @@ interface IMessage {
   role: 'user' | 'assistant';
   content: string;
   timestamp: string;
+  explernation?: string[];
 }
 
 interface IChatSession {
   session_id: string;
   last_message_time: string;
   message_count: number;
+  suggested_topic?: string;
+  preview?: string;
 }
 
 interface ISessionsResponse {

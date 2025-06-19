@@ -13,6 +13,9 @@ import { showError } from '../../utils/toaster';
 import { GradientColors } from '../../configs/app';
 import { useTheme } from '../../contexts/theme';
 import ReactMarkdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
+import remarkGfm from 'remark-gfm';
+import rehypeHighlight from 'rehype-highlight';
 import { useParams, useNavigate } from 'react-router-dom';
 import {
   sendChatMessageToSession,
@@ -31,6 +34,7 @@ interface Message {
   text: string;
   sender: senderType;
   timestamp: Date;
+  exexplanation?: string[];
 }
 
 interface ChatProps {
@@ -67,11 +71,12 @@ const NewChat: React.FC<ChatProps> = ({ className }) => {
       }
 
       if (response.data) {
-        const formattedMessages: Message[] = response.data.map((msg) => ({
+        const formattedMessages: Message[] = response.data.map((msg :any) => ({
           id: msg.id,
           text: msg.content,
           sender: msg.role === 'user' ? senderType.user : senderType.ai,
           timestamp: new Date(msg.timestamp),
+          exexplanation: msg.explanation || [], // Optional field for explanations
         }));
         setMessages(formattedMessages);
       }
@@ -236,7 +241,7 @@ const NewChat: React.FC<ChatProps> = ({ className }) => {
       ></div>
       <div className="flex items-center justify-between mb-4 border-b border-border-primary pb-3 z-[2]">
         <h1 className="text-2xl font-bold text-text-primary">
-          {sessionId ? `Chat ${sessionId.slice(-8)}` : 'New chat'}
+          {'Chat'}
         </h1>
 
         <div className="flex items-center gap-1">
@@ -358,14 +363,14 @@ export const MessageBlock: React.FC<{ message: Message }> = ({ message }) => {
       )}
 
       {message.sender === 'ai' && (
-        <div className="flex flex-col justify-start items-start gap-2 text-sm bg-ai-answer-background border border-border-primary py-8 px-10 rounded-xl  w-3/4 mx-auto">
-          <div className="flex items-start gap-2 text-sm ">
+        <div className="flex flex-col justify-start items-start gap-2 text-sm bg-ai-answer-background border border-border-primary py-8 px-10 rounded-xl  w-3/4 mx-auto ">
+          <div className="flex items-start justify-start gap-2 text-sm overflow-x-hidden">
             <img
               className="w-7 h-7 rounded-full mb-4"
               src="https://avatar.iran.liara.run/public/job/operator/male"
               alt="Rounded avatar"
             />
-            <div className="flex flex-col">
+            <div className="flex flex-col overflow-x-scroll">
               <div className="flex items-center gap-2">
                 <p className="font-semibold text-text-primary">Your AI</p>
                 <div className="border-r h-6"></div>
@@ -373,9 +378,10 @@ export const MessageBlock: React.FC<{ message: Message }> = ({ message }) => {
                   {message.timestamp.toLocaleTimeString()}
                 </p>
               </div>
-              <div className="prose prose-base max-w-none w-full text-text-primary mt-5">
+              <div className="prose prose-base w-[95%] text-text-primary mt-5">
                 <ReactMarkdown
-      
+                  rehypePlugins={[rehypeRaw, rehypeHighlight, ]}
+                  remarkPlugins={[remarkGfm]}
                 >
                   {message.text}
                 </ReactMarkdown>
